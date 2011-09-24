@@ -2,25 +2,36 @@ package app;
 
 import api.EventSource;
 import api.Plugin;
+import api.ServiceRegistry;
 import app.base.EventManager;
+import app.base.ServiceRegistryImpl;
 import app.view.AppFrame;
 
 public class Main {
+
+    private static ServiceRegistryImpl buildServiceRegistry() {
+        ServiceRegistryImpl registry = new ServiceRegistryImpl();
+        registry.register(new EventManager());
+        return registry;
+    }
+
     public static void main(String[] args) {
-        System.out.println("1");
         AppFrame frame = new AppFrame();
-        EventSource eventManager = new EventManager();
+        ServiceRegistryImpl registry = buildServiceRegistry();
+
         try {
-            Class cl = Class.forName("test.TestPlugin");
-            api.Plugin pl = (Plugin) cl.newInstance();
-            pl.load(eventManager);
-            pl.unload();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (InstantiationException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (IllegalAccessException e) {
+            loadPlugin(registry, "test.TestPlugin");
+        } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
+
+        //registry.dispose();
+    }
+
+    private static Plugin loadPlugin(ServiceRegistryImpl registry, String className) throws Exception {
+        Class cl = Class.forName(className);
+        Plugin plugin = (Plugin) cl.newInstance();
+        plugin.load(registry);
+        return plugin;
     }
 }

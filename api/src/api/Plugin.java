@@ -1,6 +1,6 @@
 package api;
 
 public interface Plugin {
-    void load(EventSource eventSource);
+    void load(ServiceRegistry registry);
     void unload();
 }
