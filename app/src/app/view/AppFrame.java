@@ -20,12 +20,16 @@ public class AppFrame extends JFrame {
         m_pluginManager.load("test.TestPlugin");
         m_timer.start();
 
-        m_layers.add(new ImagePanel(loadImage("background.png")));
+        ImagePanel imagePanel = new ImagePanel(loadImage("background.png"));
+        imagePanel.setSize(new Dimension(1024, 768));
+
+        m_layers.add(imagePanel, JLayeredPane.DEFAULT_LAYER);
+
         add(m_layers);
 
-        setSize(1024, 768);
+        setSize(imagePanel.getSize());
 
-        show();
+        setVisible(true);
 
         addWindowListener(new WindowAdapter() {
 
