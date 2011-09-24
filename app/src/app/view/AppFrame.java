@@ -1,25 +1,27 @@
 package app.view;
 
 import api.ConnectionEventListener;
-import api.ConnectionEventSource;
 import app.base.ConnectionEventManager;
 import app.base.PluginManager;
 import app.base.ServiceRegistry;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.URL;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class AppFrame extends Frame {
+public class AppFrame extends JFrame {
 
     public AppFrame() {
 
         m_pluginManager.load("test.TestPlugin");
+        m_timer.start();
+
+        m_layers.add(new ImagePanel(loadImage("background.png")));
+        add(m_layers);
 
         setSize(1024, 768);
 
@@ -31,15 +33,13 @@ public class AppFrame extends Frame {
                 shutdown();
             }
         });
-
-        onTimer();
     }
 
-    @Override
-    public void paint(Graphics graphics) {
-        super.paint(graphics);    //To change body of overridden methods use File | Settings | File Templates.
-        Insets insets = getInsets();
-        graphics.drawImage(m_img, insets.left, insets.top, this);
+    private Image loadImage(String imageName) {
+        ClassLoader ld = ClassLoader.getSystemClassLoader();
+        URL url = ld.getResource(imageName);
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        return tk.getImage(url);
     }
 
     private void shutdown() {
@@ -53,25 +53,18 @@ public class AppFrame extends Frame {
         return registry;
     }
 
-    private Image loadImage(String imageName) {
-        ClassLoader ld = ClassLoader.getSystemClassLoader();
-        URL url = ld.getResource(imageName);
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        return tk.getImage(url);
-    }
-
     private void onTimer() {
         ConnectionEventListener lst = (ConnectionEventListener) m_registry.lookupService(ConnectionEventListener.class);
         lst.onConnectionEstablished();
-        m_timer.schedule(new TimerTask() {
-            public void run() {
-                onTimer();
-            }
-        }, 4000);
     }
 
-    private Image m_img = loadImage("background.png");
+    //private Image m_img = loadImage("background.png");
     private ServiceRegistry m_registry = buildServiceRegistry();
     private PluginManager m_pluginManager = new PluginManager(m_registry);
-    private Timer m_timer = new Timer();
+    private Timer m_timer = new Timer(4000, new ActionListener() {
+        public void actionPerformed(ActionEvent actionEvent) {
+            onTimer();
+        }
+    });
+    private JLayeredPane m_layers = new JLayeredPane();
 }
