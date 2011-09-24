@@ -6,8 +6,8 @@ public class TestPlugin implements Plugin, EventListener {
 
     private Command m_unsubscribeCommand;
 
-    public void load(ServiceRegistry registry) {
-        EventSource src = (EventSource) registry.lookupService(EventSource.class);
+    public void load(ServiceLookup lookup) {
+        EventSource src = (EventSource) lookup.lookupService(EventSource.class);
         m_unsubscribeCommand = src.addListener(this);
     }
 

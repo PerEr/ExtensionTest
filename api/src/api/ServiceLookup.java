@@ -1,5 +1,5 @@
 package api;
 
-public interface ServiceRegistry {
+public interface ServiceLookup {
     Object lookupService(Class cl);
 }

@@ -1,11 +1,11 @@
 package app.base;
 
-import api.ServiceRegistry;
+import api.ServiceLookup;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ServiceRegistryImpl implements ServiceRegistry{
+public class ServiceRegistry implements ServiceLookup {
 
     public void register(Object service) {
         Class cl = service.getClass();
