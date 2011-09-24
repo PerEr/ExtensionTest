@@ -2,12 +2,12 @@ package test;
 
 import api.*;
 
-public class TestPlugin implements Plugin, EventListener {
+public class TestPlugin implements Plugin, ConnectionEventListener {
 
     private Command m_unsubscribeCommand;
 
     public void load(ServiceLookup lookup) {
-        EventSource src = (EventSource) lookup.lookupService(EventSource.class);
+        ConnectionEventSource src = (ConnectionEventSource) lookup.lookupService(ConnectionEventSource.class);
         m_unsubscribeCommand = src.addListener(this);
     }
 
@@ -15,7 +15,13 @@ public class TestPlugin implements Plugin, EventListener {
         m_unsubscribeCommand.process();
     }
 
-    public void onEvent() {
-        // TODO
+    // Connection events
+    public void onConnectionEstablished() {
+    }
+
+    public void onConnectionLost() {
+    }
+
+    public void onDisconnect() {
     }
 }

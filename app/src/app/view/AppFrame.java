@@ -1,6 +1,6 @@
 package app.view;
 
-import app.base.EventManager;
+import app.base.ConnectionEventManager;
 import app.base.PluginManager;
 import app.base.ServiceRegistry;
 
@@ -45,7 +45,7 @@ public class AppFrame extends Frame {
 
     private ServiceRegistry buildServiceRegistry() {
         ServiceRegistry registry = new ServiceRegistry();
-        registry.register(new EventManager());
+        registry.register(new ConnectionEventManager());
         return registry;
     }
 
