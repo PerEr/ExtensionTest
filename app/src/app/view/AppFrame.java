@@ -21,7 +21,7 @@ public class AppFrame extends Frame {
 
         m_pluginManager.load("test.TestPlugin");
 
-        setSize(1024, 563);
+        setSize(1024, 768);
 
         show();
 
