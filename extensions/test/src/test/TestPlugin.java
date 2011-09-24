@@ -17,6 +17,7 @@ public class TestPlugin implements Plugin, ConnectionEventListener {
 
     // Connection events
     public void onConnectionEstablished() {
+        System.out.println("Conn established");
     }
 
     public void onConnectionLost() {
