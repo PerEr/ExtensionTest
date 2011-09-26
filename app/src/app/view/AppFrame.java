@@ -1,7 +1,5 @@
 package app.view;
 
-import api.ConnectionEventListener;
-import app.base.ConnectionEventManager;
 import app.base.PluginManager;
 import app.base.ServiceRegistry;
 
@@ -66,13 +64,10 @@ public class AppFrame extends JFrame {
 
     private ServiceRegistry buildServiceRegistry() {
         ServiceRegistry registry = new ServiceRegistry();
-        registry.register(new ConnectionEventManager());
         return registry;
     }
 
     private void onTimer() {
-        ConnectionEventListener lst = (ConnectionEventListener) m_registry.lookupService(ConnectionEventListener.class);
-        lst.onConnectionEstablished();
     }
 
     //private Image m_img = loadImage("background.png");
