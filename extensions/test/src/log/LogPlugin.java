@@ -1,9 +1,9 @@
 package log;
 
-import api.Command;
-import api.Plugin;
-import api.ServiceLookup;
-import api.service.Logger;
+import api.plugin.Plugin;
+import api.plugin.ServiceLookup;
+import api.util.Command;
+import api.services.Logger;
 
 public class LogPlugin implements Plugin {
 
@@ -16,7 +16,8 @@ public class LogPlugin implements Plugin {
 
         unpublishCommand = new Command() {
             public void process() {
-                lookup.unpublishService(logger);
+                int count = lookup.unpublishService(logger);
+                assert count == 1;
             }
         };
     }

@@ -1,4 +1,4 @@
-package api.service;
+package api.services;
 
 public interface UsageReport {
 

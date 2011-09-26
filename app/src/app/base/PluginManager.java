@@ -1,6 +1,6 @@
 package app.base;
 
-import api.Plugin;
+import api.plugin.Plugin;
 
 import java.util.LinkedList;
 import java.util.List;

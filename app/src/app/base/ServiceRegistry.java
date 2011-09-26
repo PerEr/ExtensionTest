@@ -1,22 +1,27 @@
 package app.base;
 
-import api.ServiceLookup;
+import api.plugin.ServiceLookup;
 
 import java.util.*;
 
 public class ServiceRegistry implements ServiceLookup {
 
-    public void publishService(Class cl, Object service) {
+    public int publishService(Class cl, Object service) {
         Class interfaces[] = service.getClass().getInterfaces();
         for (int ii=0 ; ii<interfaces.length ; ++ii) {
             addService(interfaces[ii], service);
         }
+        return interfaces.length;
     }
 
-    public void unpublishService(Object service) {
+    public int unpublishService(Object service) {
+        int count = 0;
         for (Deque<Object> services : servicesMap.values()) {
+            int sz = services.size();
             services.remove(service);
+            count += sz - services.size();
         }
+        return count;
     }
 
     public Object lookupService(Class cl) {

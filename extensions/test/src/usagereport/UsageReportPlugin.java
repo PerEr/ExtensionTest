@@ -1,10 +1,10 @@
 package usagereport;
 
 
-import api.Command;
-import api.Plugin;
-import api.ServiceLookup;
-import api.service.UsageReport;
+import api.plugin.Plugin;
+import api.plugin.ServiceLookup;
+import api.util.Command;
+import api.services.UsageReport;
 
 public class UsageReportPlugin implements Plugin {
 
@@ -17,7 +17,8 @@ public class UsageReportPlugin implements Plugin {
 
         unpublishCommand = new Command() {
             public void process() {
-                lookup.unpublishService(reporter);
+                int count = lookup.unpublishService(reporter);
+                assert count == 1;
             }
         };
     }

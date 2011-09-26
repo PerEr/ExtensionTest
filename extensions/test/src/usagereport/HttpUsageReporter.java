@@ -1,8 +1,8 @@
 package usagereport;
 
-import api.ServiceLookup;
-import api.service.Logger;
-import api.service.UsageReport;
+import api.plugin.ServiceLookup;
+import api.services.Logger;
+import api.services.UsageReport;
 
 public class HttpUsageReporter implements UsageReport {
 

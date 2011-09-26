@@ -1,6 +1,6 @@
 package app.view;
 
-import api.service.Logger;
+import api.services.Logger;
 import app.base.PluginManager;
 import app.base.PluginManagerNotification;
 import app.base.ServiceRegistry;
@@ -27,15 +27,9 @@ public class AppFrame extends JFrame {
             }
         });
 
-        {
-            Logger logger = (Logger) registry.lookupService(Logger.class);
-            logger.logInfo("Loading plugins...");
-        }
-
+        log("Loading plugins...");
         loadPlugins();
-
-        Logger logger = (Logger) registry.lookupService(Logger.class);
-        logger.logInfo("Loaded plugins...");
+        log("Loaded plugins...");
 
         setVisible(true);
 
@@ -71,8 +65,15 @@ public class AppFrame extends JFrame {
     }
 
     private void shutdown() {
+        log("Plugins unloading...");
         pluginManager.dispose();
+        log("Plugins unloaded");
         registry.dispose();
+    }
+
+    private void log(String message) {
+        Logger logger = (Logger) registry.lookupService(Logger.class);
+        logger.logInfo(message);
     }
 
     private ServiceRegistry buildServiceRegistry() {
@@ -83,7 +84,7 @@ public class AppFrame extends JFrame {
             }
 
             public void logInfo(String message) {
-                System.out.println("Default logger; " + message);
+                System.out.println("Ful-logger; " + message);
             }
 
             public void logDebug(String message) {
@@ -106,11 +107,11 @@ public class AppFrame extends JFrame {
 
     private PluginManager pluginManager = new PluginManager(registry, new PluginManagerNotification() {
         public void onLoadFailure(String classname, Exception e) {
-            System.out.println("Failed to load " + classname);
+            log("Failed to load " + classname);
         }
 
         public void onLoaded(String className) {
-            System.out.println("Loaded " + className);
+            log("Loaded " + className);
         }
     });
 

@@ -1,6 +1,6 @@
 package log;
 
-import api.service.Logger;
+import api.services.Logger;
 
 public class BasicLogger implements Logger {
     public void logError(String message) {
