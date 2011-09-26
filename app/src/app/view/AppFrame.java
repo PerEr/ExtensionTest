@@ -17,19 +17,8 @@ public class AppFrame extends JFrame {
 
     public AppFrame() {
 
-        m_pluginManager.load("test.TestPlugin");
-        m_timer.start();
-
-        ImagePanel imagePanel = new ImagePanel(loadImage("background.png"));
-        imagePanel.setSize(new Dimension(1024, 768));
-
-        m_layers.add(imagePanel, JLayeredPane.DEFAULT_LAYER);
-
+        m_layers = setupLayers();
         add(m_layers);
-
-        setSize(imagePanel.getSize());
-
-        setVisible(true);
 
         addWindowListener(new WindowAdapter() {
 
@@ -37,6 +26,30 @@ public class AppFrame extends JFrame {
                 shutdown();
             }
         });
+
+        loadPlugins();
+
+        setVisible(true);
+
+        m_timer.start();
+
+    }
+
+    private JLayeredPane setupLayers() {
+        JLayeredPane layers = new JLayeredPane();
+
+        ImagePanel imagePanel = new ImagePanel(loadImage("background.png"));
+        imagePanel.setSize(new Dimension(1024, 768));
+
+        layers.add(imagePanel, JLayeredPane.DEFAULT_LAYER);
+
+        setSize(imagePanel.getSize());
+
+        return layers;
+    }
+
+    private void loadPlugins() {
+        m_pluginManager.load("test.TestPlugin");
     }
 
     private Image loadImage(String imageName) {
@@ -70,5 +83,5 @@ public class AppFrame extends JFrame {
             onTimer();
         }
     });
-    private JLayeredPane m_layers = new JLayeredPane();
+    private JLayeredPane m_layers;
 }
