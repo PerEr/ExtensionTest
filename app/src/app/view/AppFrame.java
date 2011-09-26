@@ -1,5 +1,6 @@
 package app.view;
 
+import api.service.Logger;
 import app.base.PluginManager;
 import app.base.PluginManagerNotification;
 import app.base.ServiceRegistry;
@@ -16,8 +17,8 @@ public class AppFrame extends JFrame {
 
     public AppFrame() {
 
-        m_layers = setupLayers();
-        add(m_layers);
+        layers = setupLayers();
+        add(layers);
 
         addWindowListener(new WindowAdapter() {
 
@@ -26,11 +27,19 @@ public class AppFrame extends JFrame {
             }
         });
 
+        {
+            Logger logger = (Logger) registry.lookupService(Logger.class);
+            logger.logInfo("Loading plugins...");
+        }
+
         loadPlugins();
+
+        Logger logger = (Logger) registry.lookupService(Logger.class);
+        logger.logInfo("Loaded plugins...");
 
         setVisible(true);
 
-        m_timer.start();
+        timer.start();
 
     }
 
@@ -48,7 +57,10 @@ public class AppFrame extends JFrame {
     }
 
     private void loadPlugins() {
-        m_pluginManager.load(new String[] {"test.TestPlugin"});
+        pluginManager.load(new String[] {
+                "log.LogPlugin",
+                "usagereport.UsageReportPlugin"
+        });
     }
 
     private Image loadImage(String imageName) {
@@ -59,27 +71,40 @@ public class AppFrame extends JFrame {
     }
 
     private void shutdown() {
-        m_pluginManager.dispose();
-        m_registry.dispose();
+        pluginManager.dispose();
+        registry.dispose();
     }
 
     private ServiceRegistry buildServiceRegistry() {
         ServiceRegistry registry = new ServiceRegistry();
+        registry.publishService(Logger.class, new Logger() {
+            public void logError(String message) {
+                logInfo(message);
+            }
+
+            public void logInfo(String message) {
+                System.out.println("Default logger; " + message);
+            }
+
+            public void logDebug(String message) {
+                logInfo(message);
+            }
+        });
         return registry;
     }
 
     private void onTimer() {
     }
 
-    private ServiceRegistry m_registry = buildServiceRegistry();
+    private ServiceRegistry registry = buildServiceRegistry();
 
-    private Timer m_timer = new Timer(4000, new ActionListener() {
+    private Timer timer = new Timer(4000, new ActionListener() {
         public void actionPerformed(ActionEvent actionEvent) {
             onTimer();
         }
     });
 
-    private PluginManager m_pluginManager = new PluginManager(m_registry, new PluginManagerNotification() {
+    private PluginManager pluginManager = new PluginManager(registry, new PluginManagerNotification() {
         public void onLoadFailure(String classname, Exception e) {
             System.out.println("Failed to load " + classname);
         }
@@ -89,5 +114,5 @@ public class AppFrame extends JFrame {
         }
     });
 
-    private JLayeredPane m_layers;
+    private JLayeredPane layers;
 }

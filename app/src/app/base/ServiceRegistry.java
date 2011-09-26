@@ -14,28 +14,28 @@ public class ServiceRegistry implements ServiceLookup {
     }
 
     public void unpublishService(Object service) {
-        for (Deque<Object> services : m_servicesMap.values()) {
+        for (Deque<Object> services : servicesMap.values()) {
             services.remove(service);
         }
     }
 
     public Object lookupService(Class cl) {
-        return m_servicesMap.get(cl).getFirst();
+        return servicesMap.get(cl).getFirst();
     }
 
     public void dispose() {
-        m_servicesMap.clear();
+        servicesMap.clear();
     }
 
 
     private void addService(Class serviceType, Object service) {
-        Deque<Object> entry = m_servicesMap.get(serviceType);
+        Deque<Object> entry = servicesMap.get(serviceType);
         if (entry == null) {
             entry = new LinkedList<Object>();
-            m_servicesMap.put(serviceType, entry);
+            servicesMap.put(serviceType, entry);
         }
         entry.addFirst(service);
     }
 
-    private Map<Class, Deque<Object>> m_servicesMap = new HashMap<Class, Deque<Object>>();
+    private Map<Class, Deque<Object>> servicesMap = new HashMap<Class, Deque<Object>>();
 }
