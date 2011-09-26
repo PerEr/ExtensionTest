@@ -7,31 +7,42 @@ import java.util.List;
 
 public class PluginManager {
 
-    public PluginManager(ServiceRegistry registry) {
-        m_registry = registry;
+    public PluginManager(ServiceRegistry registry, PluginManagerNotification notification) {
+        this.registry = registry;
+        this.notification = notification;
     }
 
-    public boolean load(String className) {
-        boolean ok = false;
-        try {
-            Class cl = Class.forName(className);
-            Plugin plugin = (Plugin) cl.newInstance();
-            plugin.load(m_registry);
-            m_plugins.add(plugin);
-            ok = true;
-        } catch (Exception e) {
-            System.out.println("Failed to load plugin " + className);
+    public void load(String[] classNames) {
+        List<Plugin> newPlugins = new LinkedList<Plugin>();
+
+        // Publish services
+        for (String className : classNames) {
+            try {
+                Class cl = Class.forName(className);
+                Plugin plugin = (Plugin) cl.newInstance();
+                plugin.publishServices(registry);
+                newPlugins.add(plugin);
+                notification.onLoaded(className);
+            } catch (Exception e) {
+                notification.onLoadFailure(className, e);
+            }
         }
-        return ok;
+
+        // Resolve dependencies, this will allow plugins to use each other.
+        for (Plugin plugin : newPlugins) {
+            plugin.resolveDependencies(registry);
+            plugins.add(plugin);
+        }
     }
 
     public void dispose() {
-        for (Plugin plugin : m_plugins) {
+        for (Plugin plugin : plugins) {
             plugin.unload();
         }
 
     }
 
-    private ServiceRegistry m_registry;
-    private List<Plugin> m_plugins = new LinkedList<Plugin>();
+    private ServiceRegistry registry;
+    private PluginManagerNotification notification;
+    private List<Plugin> plugins = new LinkedList<Plugin>();
 }

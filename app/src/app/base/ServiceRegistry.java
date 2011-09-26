@@ -2,25 +2,40 @@ package app.base;
 
 import api.ServiceLookup;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ServiceRegistry implements ServiceLookup {
 
-    public void register(Object service) {
-        Class cl = service.getClass();
-        Class interfaces[] = cl.getInterfaces();
+    public void publishService(Class cl, Object service) {
+        Class interfaces[] = service.getClass().getInterfaces();
         for (int ii=0 ; ii<interfaces.length ; ++ii) {
-            m_services.put(interfaces[ii], service);
+            addService(interfaces[ii], service);
+        }
+    }
+
+    public void unpublishService(Object service) {
+        for (Deque<Object> services : m_servicesMap.values()) {
+            services.remove(service);
         }
     }
 
     public Object lookupService(Class cl) {
-        return m_services.get(cl);
+        return m_servicesMap.get(cl).getFirst();
     }
 
     public void dispose() {
-        m_services.clear();
+        m_servicesMap.clear();
     }
-    private Map<Class, Object> m_services = new HashMap<Class, Object>();
+
+
+    private void addService(Class serviceType, Object service) {
+        Deque<Object> entry = m_servicesMap.get(serviceType);
+        if (entry == null) {
+            entry = new LinkedList<Object>();
+            m_servicesMap.put(serviceType, entry);
+        }
+        entry.addFirst(service);
+    }
+
+    private Map<Class, Deque<Object>> m_servicesMap = new HashMap<Class, Deque<Object>>();
 }

@@ -1,6 +1,7 @@
 package api;
 
 public interface Plugin {
-    void load(ServiceLookup lookup);
+    void publishServices(ServiceLookup lookup);
+    void resolveDependencies(ServiceLookup lookup);
     void unload();
 }

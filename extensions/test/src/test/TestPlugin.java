@@ -4,11 +4,12 @@ import api.*;
 
 public class TestPlugin implements Plugin {
 
-    //private Command m_unsubscribeCommand;
+    public void publishServices(ServiceLookup lookup) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 
-    public void load(ServiceLookup lookup) {
-        //ConnectionEventSource src = (ConnectionEventSource) lookup.lookupService(ConnectionEventSource.class);
-        //m_unsubscribeCommand = src.addListener(this);
+    public void resolveDependencies(ServiceLookup lookup) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public void unload() {
