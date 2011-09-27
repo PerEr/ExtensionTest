@@ -3,7 +3,6 @@ package widget;
 
 import api.plugin.Plugin;
 import api.plugin.ServiceRegistry;
-import api.util.Command;
 import api.widget.WidgetFactory;
 import api.widget.WidgetRegistry;
 
@@ -21,16 +20,16 @@ public class SimpleShapesPlugin implements Plugin {
 
     private void registerBuilder(final WidgetRegistry widgetRegistry, String name, final WidgetFactory factory) {
         widgetRegistry.registerWidgetBuilder(name, factory);
-        unpublishCommands.add(new Command() {
-            public void process() {
+        unpublishers.add(new Runnable() {
+            public void run() {
                 widgetRegistry.unregisterWidgetBuilder(factory);
             }
         });
     }
 
     public void unload() {
-        for (Command cmd : unpublishCommands) {
-            cmd.process();
+        for (Runnable cmd : unpublishers) {
+            cmd.run();
         }
     }
 
@@ -41,5 +40,5 @@ public class SimpleShapesPlugin implements Plugin {
         }
     }
 
-    private List<Command> unpublishCommands = new LinkedList<Command>();
+    private List<Runnable> unpublishers = new LinkedList<Runnable>();
 }
