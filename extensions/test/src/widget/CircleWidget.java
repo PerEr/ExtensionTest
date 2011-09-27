@@ -1,10 +1,17 @@
 package widget;
 
 
+import api.widget.WidgetBuilder;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class SimpleWidget extends JPanel {
+public class CircleWidget extends JPanel {
+
+    CircleWidget() {
+        setOpaque(false);
+    }
+
     @Override
     public void paint(Graphics graphics) {
         super.paint(graphics);
@@ -15,5 +22,13 @@ public class SimpleWidget extends JPanel {
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(100,100);
+    }
+
+    static class Builder implements WidgetBuilder {
+
+        @Override
+        public JPanel build() {
+            return new CircleWidget();
+        }
     }
 }

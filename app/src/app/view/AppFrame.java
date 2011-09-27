@@ -1,6 +1,7 @@
 package app.view;
 
 import api.services.Logger;
+import api.widget.WidgetLookup;
 import app.base.PluginManager;
 import app.base.PluginManagerNotification;
 import app.base.ServiceRegistry;
@@ -33,8 +34,8 @@ public class AppFrame extends JFrame {
         JPanel contentLayer = new JPanel(new GridLayout(10,10));
         contentLayer.setSize(new Dimension(1024,768));
         contentLayer.setOpaque(false);
-        contentLayer.add(widgetFactory.instantiate("one"));
-        contentLayer.add(widgetFactory.instantiate("one"));
+        contentLayer.add(widgetFactory.instantiate("circle"));
+        contentLayer.add(widgetFactory.instantiate("square"));
 
         layers.add(contentLayer, JLayeredPane.PALETTE_LAYER);
 
@@ -62,7 +63,8 @@ public class AppFrame extends JFrame {
     private void loadPlugins() {
         pluginManager.load(new String[] {
                 "log.LogPlugin",
-                "usagereport.UsageReportPlugin"
+                "usagereport.UsageReportPlugin",
+                "widget.SimpleShapesPlugin"
         });
     }
 
@@ -100,19 +102,17 @@ public class AppFrame extends JFrame {
                 logInfo(message);
             }
         });
+        registry.publishService(WidgetLookup.class, widgetFactory);
         return registry;
     }
 
     private void onTimer() {
     }
 
-    private ServiceRegistry registry = buildServiceRegistry();
+    private JLayeredPane layers;
 
-    private Timer timer = new Timer(4000, new ActionListener() {
-        public void actionPerformed(ActionEvent actionEvent) {
-            onTimer();
-        }
-    });
+    private WidgetLookup widgetFactory = new WidgetFactory();
+    private ServiceRegistry registry = buildServiceRegistry();
 
     private PluginManager pluginManager = new PluginManager(registry, new PluginManagerNotification() {
         public void onLoadFailure(String classname, Exception e) {
@@ -124,7 +124,10 @@ public class AppFrame extends JFrame {
         }
     });
 
-    private WidgetFactory widgetFactory = new WidgetFactory();
+    private Timer timer = new Timer(4000, new ActionListener() {
+        public void actionPerformed(ActionEvent actionEvent) {
+            onTimer();
+        }
+    });
 
-    private JLayeredPane layers;
 }

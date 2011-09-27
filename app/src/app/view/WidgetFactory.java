@@ -4,6 +4,7 @@ import api.widget.WidgetBuilder;
 import api.widget.WidgetLookup;
 
 import javax.swing.*;
+import java.util.HashMap;
 import java.util.Map;
 
 public class WidgetFactory implements WidgetLookup {
@@ -34,5 +35,5 @@ public class WidgetFactory implements WidgetLookup {
         return builder.build();
     }
 
-    private Map<String, WidgetBuilder> builders;
+    private Map<String, WidgetBuilder> builders = new HashMap<String, WidgetBuilder>();
 }
