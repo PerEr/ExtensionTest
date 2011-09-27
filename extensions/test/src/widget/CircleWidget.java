@@ -1,7 +1,7 @@
 package widget;
 
 
-import api.widget.WidgetBuilder;
+import api.widget.WidgetFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +24,7 @@ public class CircleWidget extends JPanel {
         return new Dimension(100,100);
     }
 
-    static class Builder implements WidgetBuilder {
+    static class Factory implements WidgetFactory {
 
         @Override
         public JPanel build() {

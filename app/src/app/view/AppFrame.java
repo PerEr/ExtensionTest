@@ -1,7 +1,7 @@
 package app.view;
 
 import api.services.Logger;
-import api.widget.WidgetLookup;
+import api.widget.WidgetRegistry;
 import app.base.PluginManager;
 import app.base.PluginManagerNotification;
 import app.base.ServiceRegistry;
@@ -103,7 +103,7 @@ public class AppFrame extends JFrame {
                 logInfo(message);
             }
         });
-        registry.publishService(WidgetLookup.class, widgetFactory);
+        registry.publishService(WidgetRegistry.class, widgetFactory);
         return registry;
     }
 
@@ -112,7 +112,7 @@ public class AppFrame extends JFrame {
 
     private final JLayeredPane layers;
 
-    private final WidgetLookup widgetFactory = new WidgetFactory();
+    private final WidgetRegistry widgetFactory = new SimpleWidgetRegistry();
     private final ServiceRegistry registry = buildServiceRegistry();
 
     private final PluginManager pluginManager = new PluginManager(registry, new PluginManagerNotification() {

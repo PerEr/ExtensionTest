@@ -1,10 +1,8 @@
 package app.base;
 
-import api.plugin.ServiceLookup;
-
 import java.util.*;
 
-public class ServiceRegistry implements ServiceLookup {
+public class ServiceRegistry implements api.plugin.ServiceRegistry {
 
     public int publishService(Class cl, Object service) {
         final Class interfaces[] = service.getClass().getInterfaces();

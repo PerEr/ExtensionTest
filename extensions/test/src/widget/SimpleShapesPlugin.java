@@ -2,10 +2,10 @@ package widget;
 
 
 import api.plugin.Plugin;
-import api.plugin.ServiceLookup;
+import api.plugin.ServiceRegistry;
 import api.util.Command;
-import api.widget.WidgetBuilder;
-import api.widget.WidgetLookup;
+import api.widget.WidgetFactory;
+import api.widget.WidgetRegistry;
 
 import javax.swing.*;
 import java.util.LinkedList;
@@ -13,17 +13,17 @@ import java.util.List;
 
 public class SimpleShapesPlugin implements Plugin {
 
-    public void load(ServiceLookup lookup) {
-        final WidgetLookup widgetLookup = (WidgetLookup) lookup.lookupService(WidgetLookup.class);
-        registerBuilder(widgetLookup, "circle", new CircleWidget.Builder());
-        registerBuilder(widgetLookup, "square", new SquareWidget.Builder());
+    public void load(ServiceRegistry registry) {
+        final WidgetRegistry widgetRegistry = (WidgetRegistry) registry.lookupService(WidgetRegistry.class);
+        registerBuilder(widgetRegistry, "circle", new CircleWidget.Factory());
+        registerBuilder(widgetRegistry, "square", new SquareWidget.Factory());
     }
 
-    private void registerBuilder(final WidgetLookup widgetLookup, String name, final WidgetBuilder builder) {
-        widgetLookup.registerWidgetBuilder(name, builder);
+    private void registerBuilder(final WidgetRegistry widgetRegistry, String name, final WidgetFactory factory) {
+        widgetRegistry.registerWidgetBuilder(name, factory);
         unpublishCommands.add(new Command() {
             public void process() {
-                widgetLookup.unregisterWidgetBuilder(builder);
+                widgetRegistry.unregisterWidgetBuilder(factory);
             }
         });
     }
@@ -34,7 +34,7 @@ public class SimpleShapesPlugin implements Plugin {
         }
     }
 
-    private static class CircleBuilder implements WidgetBuilder {
+    private static class CircleFactory implements WidgetFactory {
         @Override
         public JPanel build() {
             return new CircleWidget();
