@@ -9,7 +9,7 @@ import java.util.Map;
 
 class SimpleWidgetRegistry implements WidgetRegistry {
 
-    public void registerWidgetBuilder(String type, WidgetFactory factory) {
+    public void registerWidgetFactory(String type, WidgetFactory factory) {
         assert type != null;
         assert factory != null;
         assert builders.get(type) == null;
@@ -17,7 +17,7 @@ class SimpleWidgetRegistry implements WidgetRegistry {
         builders.put(type, factory);
     }
 
-    public void unregisterWidgetBuilder(WidgetFactory factory) {
+    public void unregisterWidgetFactory(WidgetFactory factory) {
         assert factory != null;
 
         final Object removed = builders.remove(factory);
@@ -32,7 +32,7 @@ class SimpleWidgetRegistry implements WidgetRegistry {
 
         assert factory != null;
 
-        return factory.build();
+        return factory.instantiate();
     }
 
     private final Map<String, WidgetFactory> builders = new HashMap<String, WidgetFactory>();

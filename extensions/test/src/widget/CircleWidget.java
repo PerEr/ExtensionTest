@@ -27,7 +27,7 @@ class CircleWidget extends JPanel {
     static class Factory implements WidgetFactory {
 
         @Override
-        public JPanel build() {
+        public JPanel instantiate() {
             return new CircleWidget();
         }
     }

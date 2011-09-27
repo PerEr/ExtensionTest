@@ -3,7 +3,7 @@ package api.widget;
 import javax.swing.*;
 
 public interface WidgetRegistry {
-    void registerWidgetBuilder(String type, WidgetFactory factory);
-    void unregisterWidgetBuilder(WidgetFactory factory);
+    void registerWidgetFactory(String type, WidgetFactory factory);
+    void unregisterWidgetFactory(WidgetFactory factory);
     JPanel instantiate(String type);
 }

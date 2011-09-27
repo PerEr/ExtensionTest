@@ -19,10 +19,10 @@ public class SimpleShapesPlugin implements Plugin {
     }
 
     private void registerBuilder(final WidgetRegistry widgetRegistry, String name, final WidgetFactory factory) {
-        widgetRegistry.registerWidgetBuilder(name, factory);
+        widgetRegistry.registerWidgetFactory(name, factory);
         unpublishers.add(new Runnable() {
             public void run() {
-                widgetRegistry.unregisterWidgetBuilder(factory);
+                widgetRegistry.unregisterWidgetFactory(factory);
             }
         });
     }
@@ -35,7 +35,7 @@ public class SimpleShapesPlugin implements Plugin {
 
     private static class CircleFactory implements WidgetFactory {
         @Override
-        public JPanel build() {
+        public JPanel instantiate() {
             return new CircleWidget();
         }
     }
