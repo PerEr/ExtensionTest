@@ -11,7 +11,6 @@ class ImagePanel extends JPanel {
 
     @Override
     public void paintComponent(Graphics graphics) {
-//        super.paint(graphics);
         final Insets insets = getInsets();
         graphics.drawImage(m_image, insets.left, insets.top, this);
     }

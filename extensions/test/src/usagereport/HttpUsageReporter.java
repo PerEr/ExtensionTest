@@ -22,8 +22,4 @@ public class HttpUsageReporter implements UsageReport {
         logger.logInfo("Reporting logout for user " + user);
     }
 
-    public void reportGameStarted(String user, String game) {
-        Logger logger = (Logger) registry.lookupService(Logger.class);
-        logger.logInfo("Reporting game start for user " + user);
-    }
 }
