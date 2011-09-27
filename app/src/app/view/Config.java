@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Config {
+class Config {
 
     Config() throws IOException {
         ClassLoader ld = ClassLoader.getSystemClassLoader();

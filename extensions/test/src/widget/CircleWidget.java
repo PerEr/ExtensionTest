@@ -6,7 +6,7 @@ import api.widget.WidgetFactory;
 import javax.swing.*;
 import java.awt.*;
 
-public class CircleWidget extends JPanel {
+class CircleWidget extends JPanel {
 
     CircleWidget() {
         setOpaque(false);

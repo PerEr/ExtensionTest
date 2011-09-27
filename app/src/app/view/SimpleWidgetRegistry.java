@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SimpleWidgetRegistry implements WidgetRegistry {
+class SimpleWidgetRegistry implements WidgetRegistry {
 
     public void registerWidgetBuilder(String type, WidgetFactory factory) {
         assert type != null;

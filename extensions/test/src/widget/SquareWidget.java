@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class SquareWidget extends JPanel {
+class SquareWidget extends JPanel {
 
     SquareWidget() {
         setOpaque(false);

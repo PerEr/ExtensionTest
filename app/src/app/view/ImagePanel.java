@@ -3,9 +3,9 @@ package app.view;
 import javax.swing.*;
 import java.awt.*;
 
-public class ImagePanel extends JPanel {
+class ImagePanel extends JPanel {
 
-    public ImagePanel(Image image) {
+    ImagePanel(Image image) {
         m_image = image;
     }
 
