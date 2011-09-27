@@ -20,7 +20,7 @@ public class WidgetFactory implements WidgetLookup {
     public void unregisterWidgetBuilder(WidgetBuilder builder) {
         assert builder != null;
 
-        Object removed = builders.remove(builder);
+        final Object removed = builders.remove(builder);
 
         assert removed != null;
     }
@@ -35,5 +35,5 @@ public class WidgetFactory implements WidgetLookup {
         return builder.build();
     }
 
-    private Map<String, WidgetBuilder> builders = new HashMap<String, WidgetBuilder>();
+    private final Map<String, WidgetBuilder> builders = new HashMap<String, WidgetBuilder>();
 }

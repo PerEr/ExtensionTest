@@ -7,7 +7,7 @@ import java.util.*;
 public class ServiceRegistry implements ServiceLookup {
 
     public int publishService(Class cl, Object service) {
-        Class interfaces[] = service.getClass().getInterfaces();
+        final Class interfaces[] = service.getClass().getInterfaces();
         for (int ii=0 ; ii<interfaces.length ; ++ii) {
             addService(interfaces[ii], service);
         }
@@ -16,7 +16,7 @@ public class ServiceRegistry implements ServiceLookup {
 
     public int unpublishService(Object service) {
         int count = 0;
-        for (Deque<Object> services : servicesMap.values()) {
+        for (final Deque<Object> services : servicesMap.values()) {
             int sz = services.size();
             services.remove(service);
             count += sz - services.size();
@@ -42,5 +42,5 @@ public class ServiceRegistry implements ServiceLookup {
         entry.addFirst(service);
     }
 
-    private Map<Class, Deque<Object>> servicesMap = new HashMap<Class, Deque<Object>>();
+    private final Map<Class, Deque<Object>> servicesMap = new HashMap<Class, Deque<Object>>();
 }

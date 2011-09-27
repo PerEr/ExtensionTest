@@ -12,11 +12,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.net.URL;
 
 public class AppFrame extends JFrame {
 
-    public AppFrame() {
+    public AppFrame() throws IOException {
 
         layers = setupLayers();
 
@@ -27,15 +28,13 @@ public class AppFrame extends JFrame {
             }
         });
 
+        Config config = new Config();
+
         log("Loading plugins...");
-        loadPlugins();
+        pluginManager.load(config.plugins());
         log("Loaded plugins...");
 
-        JPanel contentLayer = new JPanel(new GridLayout(10,10));
-        contentLayer.setSize(new Dimension(1024,768));
-        contentLayer.setOpaque(false);
-        contentLayer.add(widgetFactory.instantiate("circle"));
-        contentLayer.add(widgetFactory.instantiate("square"));
+        final JPanel contentLayer = loadWidgets(config.widgets());
 
         layers.add(contentLayer, JLayeredPane.PALETTE_LAYER);
 
@@ -47,10 +46,20 @@ public class AppFrame extends JFrame {
 
     }
 
-    private JLayeredPane setupLayers() {
-        JLayeredPane layers = new JLayeredPane();
+    private JPanel loadWidgets(String[] widgets) {
+        final JPanel contentLayer = new JPanel(new GridLayout(1,4));
+        contentLayer.setSize(new Dimension(1024,768));
+        contentLayer.setOpaque(false);
+        for (String widget : widgets) {
+            contentLayer.add(widgetFactory.instantiate(widget));
+        }
+        return contentLayer;
+    }
 
-        ImagePanel imagePanel = new ImagePanel(loadImage("background.png"));
+    private JLayeredPane setupLayers() {
+        final JLayeredPane layers = new JLayeredPane();
+
+        final ImagePanel imagePanel = new ImagePanel(loadImage("background.png"));
         imagePanel.setSize(new Dimension(1024, 768));
 
         layers.add(imagePanel, JLayeredPane.DEFAULT_LAYER);
@@ -60,18 +69,10 @@ public class AppFrame extends JFrame {
         return layers;
     }
 
-    private void loadPlugins() {
-        pluginManager.load(new String[] {
-                "log.LogPlugin",
-                "usagereport.UsageReportPlugin",
-                "widget.SimpleShapesPlugin"
-        });
-    }
-
     private Image loadImage(String imageName) {
-        ClassLoader ld = ClassLoader.getSystemClassLoader();
-        URL url = ld.getResource(imageName);
-        Toolkit tk = Toolkit.getDefaultToolkit();
+        final ClassLoader ld = ClassLoader.getSystemClassLoader();
+        final URL url = ld.getResource(imageName);
+        final Toolkit tk = Toolkit.getDefaultToolkit();
         return tk.getImage(url);
     }
 
@@ -83,12 +84,12 @@ public class AppFrame extends JFrame {
     }
 
     private void log(String message) {
-        Logger logger = (Logger) registry.lookupService(Logger.class);
+        final Logger logger = (Logger) registry.lookupService(Logger.class);
         logger.logInfo(message);
     }
 
     private ServiceRegistry buildServiceRegistry() {
-        ServiceRegistry registry = new ServiceRegistry();
+        final ServiceRegistry registry = new ServiceRegistry();
         registry.publishService(Logger.class, new Logger() {
             public void logError(String message) {
                 logInfo(message);
@@ -109,12 +110,12 @@ public class AppFrame extends JFrame {
     private void onTimer() {
     }
 
-    private JLayeredPane layers;
+    private final JLayeredPane layers;
 
-    private WidgetLookup widgetFactory = new WidgetFactory();
-    private ServiceRegistry registry = buildServiceRegistry();
+    private final WidgetLookup widgetFactory = new WidgetFactory();
+    private final ServiceRegistry registry = buildServiceRegistry();
 
-    private PluginManager pluginManager = new PluginManager(registry, new PluginManagerNotification() {
+    private final PluginManager pluginManager = new PluginManager(registry, new PluginManagerNotification() {
         public void onLoadFailure(String classname, Exception e) {
             log("Failed to load " + classname);
         }
@@ -124,7 +125,7 @@ public class AppFrame extends JFrame {
         }
     });
 
-    private Timer timer = new Timer(4000, new ActionListener() {
+    private final Timer timer = new Timer(4000, new ActionListener() {
         public void actionPerformed(ActionEvent actionEvent) {
             onTimer();
         }

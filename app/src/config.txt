@@ -1,0 +1,9 @@
+plugin log.LogPlugin
+plugin usagereport.UsageReportPlugin
+plugin widget.SimpleShapesPlugin
+
+widget circle
+widget square
+widget circle
+widget square
+
