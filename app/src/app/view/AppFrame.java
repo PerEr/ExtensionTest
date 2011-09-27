@@ -18,7 +18,6 @@ public class AppFrame extends JFrame {
     public AppFrame() {
 
         layers = setupLayers();
-        add(layers);
 
         addWindowListener(new WindowAdapter() {
 
@@ -30,6 +29,16 @@ public class AppFrame extends JFrame {
         log("Loading plugins...");
         loadPlugins();
         log("Loaded plugins...");
+
+        JPanel contentLayer = new JPanel(new GridLayout(10,10));
+        contentLayer.setSize(new Dimension(1024,768));
+        contentLayer.setOpaque(false);
+        contentLayer.add(widgetFactory.instantiate("one"));
+        contentLayer.add(widgetFactory.instantiate("one"));
+
+        layers.add(contentLayer, JLayeredPane.PALETTE_LAYER);
+
+        setContentPane(layers);
 
         setVisible(true);
 
@@ -114,6 +123,8 @@ public class AppFrame extends JFrame {
             log("Loaded " + className);
         }
     });
+
+    private WidgetFactory widgetFactory = new WidgetFactory();
 
     private JLayeredPane layers;
 }
