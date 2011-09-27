@@ -3,16 +3,16 @@ package app.view;
 import javax.swing.*;
 import java.awt.*;
 
-public class ImagePanel extends JPanel {
+class ImagePanel extends JPanel {
 
-    public ImagePanel(Image image) {
+    ImagePanel(Image image) {
         m_image = image;
     }
 
     @Override
     public void paintComponent(Graphics graphics) {
 //        super.paint(graphics);
-        Insets insets = getInsets();
+        final Insets insets = getInsets();
         graphics.drawImage(m_image, insets.left, insets.top, this);
     }
 

@@ -1,6 +1,6 @@
 package api.plugin;
 
 public interface Plugin {
-    void load(ServiceLookup lookup);
+    void load(ServiceRegistry registry);
     void unload();
 }

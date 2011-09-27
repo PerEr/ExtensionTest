@@ -14,9 +14,9 @@ public class PluginManager {
 
     public void load(String[] classNames) {
         // Publish services
-        for (String className : classNames) {
+        for (final String className : classNames) {
             try {
-                Class cl = Class.forName(className);
+                final Class cl = Class.forName(className);
                 Plugin plugin = (Plugin) cl.newInstance();
                 plugin.load(registry);
                 plugins.add(plugin);
@@ -29,13 +29,13 @@ public class PluginManager {
     }
 
     public void dispose() {
-        for (Plugin plugin : plugins) {
+        for (final Plugin plugin : plugins) {
             plugin.unload();
         }
 
     }
 
-    private ServiceRegistry registry;
-    private PluginManagerNotification notification;
-    private List<Plugin> plugins = new LinkedList<Plugin>();
+    private final ServiceRegistry registry;
+    private final PluginManagerNotification notification;
+    private final List<Plugin> plugins = new LinkedList<Plugin>();
 }
