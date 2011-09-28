@@ -1,4 +1,4 @@
-package app.view;
+package app.base;
 
 import api.widget.WidgetFactory;
 import api.widget.WidgetRegistry;
@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
-class SimpleWidgetRegistry implements WidgetRegistry {
+public class SimpleWidgetRegistry implements WidgetRegistry {
 
     public void registerWidgetFactory(String type, WidgetFactory factory) {
         assert type != null;
