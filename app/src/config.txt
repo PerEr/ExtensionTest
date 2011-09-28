@@ -1,9 +1,13 @@
 plugin log.LogPlugin
 plugin usagereport.UsageReportPlugin
 plugin widget.SimpleShapesPlugin
+plugin clock.ClockPlugin
+plugin connection.monitor.ConnectionMonitorPlugin
+plugin connection.widget.ConnectionWidgetPlugin
 
-widget circle
+widget clock
+widget connection.status
 widget square
+widget connection.status
 widget circle
-widget square
 
