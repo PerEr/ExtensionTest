@@ -1,4 +1,4 @@
-package app.base;
+package common.plugin;
 
 public interface PluginManagerNotification {
 

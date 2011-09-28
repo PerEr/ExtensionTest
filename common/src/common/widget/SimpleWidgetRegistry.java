@@ -1,4 +1,4 @@
-package app.base;
+package common.widget;
 
 import api.widget.WidgetFactory;
 import api.widget.WidgetRegistry;

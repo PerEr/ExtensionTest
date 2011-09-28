@@ -2,10 +2,11 @@ package app.view;
 
 import api.services.Logger;
 import api.widget.WidgetRegistry;
-import app.base.PluginManager;
-import app.base.PluginManagerNotification;
-import app.base.ServiceRegistry;
-import app.base.SimpleWidgetRegistry;
+import app.config.Config;
+import common.plugin.PluginManager;
+import common.plugin.PluginManagerNotification;
+import common.plugin.ServiceRegistry;
+import common.widget.SimpleWidgetRegistry;
 
 import javax.swing.*;
 import java.awt.*;

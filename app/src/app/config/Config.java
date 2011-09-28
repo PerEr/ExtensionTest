@@ -1,12 +1,12 @@
-package app.view;
+package app.config;
 
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 
-class Config {
+public class Config {
 
-    Config() throws IOException {
+    public Config() throws IOException {
         ClassLoader ld = ClassLoader.getSystemClassLoader();
         InputStream is = ld.getResourceAsStream("config.txt");
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -22,11 +22,11 @@ class Config {
         }
     }
 
-    String[] plugins() {
+    public String[] plugins() {
         return (String[])plugins.toArray(new String[plugins.size()]);
     }
 
-    String[] widgets() {
+    public String[] widgets() {
         return (String[])widgets.toArray(new String[widgets.size()]);
     }
 

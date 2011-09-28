@@ -1,4 +1,4 @@
-package app.base;
+package common.plugin;
 
 import api.plugin.Plugin;
 
