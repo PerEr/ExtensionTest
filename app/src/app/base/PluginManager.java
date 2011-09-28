@@ -26,6 +26,11 @@ public class PluginManager {
             }
         }
 
+        // Resolve intra-plugin dependencies
+        for (final Plugin plugin : plugins) {
+            plugin.resolve(registry);
+        }
+
     }
 
     public void dispose() {

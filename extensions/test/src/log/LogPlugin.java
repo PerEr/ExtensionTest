@@ -21,6 +21,10 @@ public class LogPlugin implements Plugin {
         };
     }
 
+    @Override
+    public void resolve(ServiceRegistry registry) {
+    }
+
     public void unload() {
         unpublisher.run();
         unpublisher = null;

@@ -22,6 +22,10 @@ public class UsageReportPlugin implements Plugin {
         };
     }
 
+    @Override
+    public void resolve(ServiceRegistry registry) {
+    }
+
     public void unload() {
         unpublisher.run();
         unpublisher = null;
