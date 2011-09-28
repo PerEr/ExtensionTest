@@ -14,8 +14,9 @@ public class SimpleShapesPlugin implements Plugin {
 
     public void load(ServiceRegistry registry) {
         final WidgetRegistry widgetRegistry = (WidgetRegistry) registry.lookupService(WidgetRegistry.class);
-        registerBuilder(widgetRegistry, "circle", new CircleWidget.Factory());
-        registerBuilder(widgetRegistry, "square", new SquareWidget.Factory());
+
+        registerBuilder(widgetRegistry, CircleWidget.NAME, new CircleWidget.Factory());
+        registerBuilder(widgetRegistry, SquareWidget.NAME, new SquareWidget.Factory());
     }
 
     private void registerBuilder(final WidgetRegistry widgetRegistry, String name, final WidgetFactory factory) {
@@ -30,13 +31,6 @@ public class SimpleShapesPlugin implements Plugin {
     public void unload() {
         for (Runnable cmd : unpublishers) {
             cmd.run();
-        }
-    }
-
-    private static class CircleFactory implements WidgetFactory {
-        @Override
-        public JPanel instantiate() {
-            return new CircleWidget();
         }
     }
 

@@ -31,4 +31,6 @@ class CircleWidget extends JPanel {
             return new CircleWidget();
         }
     }
+
+    final static String NAME = new String("circle");
 }

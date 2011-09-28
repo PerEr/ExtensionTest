@@ -30,4 +30,6 @@ class SquareWidget extends JPanel {
             return new SquareWidget();
         }
     }
+
+    final static String NAME = new String("square");
 }
