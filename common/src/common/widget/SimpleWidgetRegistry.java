@@ -4,8 +4,7 @@ import api.widget.WidgetFactory;
 import api.widget.WidgetRegistry;
 
 import javax.swing.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class SimpleWidgetRegistry implements WidgetRegistry {
 
@@ -20,9 +19,21 @@ public class SimpleWidgetRegistry implements WidgetRegistry {
     public void unregisterWidgetFactory(WidgetFactory factory) {
         assert factory != null;
 
-        final Object removed = builders.remove(factory);
+        int sz = builders.size();
 
-        assert removed != null;
+        List<String> keys = new LinkedList<String>();
+
+        for (Map.Entry<String, WidgetFactory> entry : builders.entrySet()) {
+            if (factory == entry.getValue()) {
+                keys.add(entry.getKey());
+            }
+        }
+
+        for (String key : keys) {
+            builders.remove(key);
+        }
+
+        assert builders.size() < sz;
     }
 
     public JComponent instantiate(String type) {
