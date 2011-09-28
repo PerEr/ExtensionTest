@@ -25,7 +25,7 @@ class SimpleWidgetRegistry implements WidgetRegistry {
         assert removed != null;
     }
 
-    public JPanel instantiate(String type) {
+    public JComponent instantiate(String type) {
         assert type != null;
 
         WidgetFactory factory = builders.get(type);

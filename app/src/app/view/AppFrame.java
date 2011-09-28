@@ -34,7 +34,7 @@ public class AppFrame extends JFrame {
         pluginManager.load(config.plugins());
         log("Loaded plugins...");
 
-        final JPanel contentLayer = loadWidgets(config.widgets());
+        final JComponent contentLayer = loadWidgets(config.widgets());
 
         layers.add(contentLayer, JLayeredPane.PALETTE_LAYER);
 
@@ -46,7 +46,7 @@ public class AppFrame extends JFrame {
 
     }
 
-    private JPanel loadWidgets(String[] widgets) {
+    private JComponent loadWidgets(String[] widgets) {
         final JPanel contentLayer = new JPanel(new GridLayout(1,4));
         contentLayer.setSize(new Dimension(1024,768));
         contentLayer.setOpaque(false);

@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-class SquareWidget extends JPanel {
+class SquareWidget extends JComponent {
 
     SquareWidget() {
         setOpaque(false);
@@ -26,7 +26,7 @@ class SquareWidget extends JPanel {
 
     static class Factory implements WidgetFactory {
         @Override
-        public JPanel instantiate() {
+        public JComponent instantiate() {
             return new SquareWidget();
         }
     }

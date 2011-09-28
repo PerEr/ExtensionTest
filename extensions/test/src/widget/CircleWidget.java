@@ -6,7 +6,7 @@ import api.widget.WidgetFactory;
 import javax.swing.*;
 import java.awt.*;
 
-class CircleWidget extends JPanel {
+class CircleWidget extends JComponent {
 
     CircleWidget() {
         setOpaque(false);
@@ -27,7 +27,7 @@ class CircleWidget extends JPanel {
     static class Factory implements WidgetFactory {
 
         @Override
-        public JPanel instantiate() {
+        public JComponent instantiate() {
             return new CircleWidget();
         }
     }
