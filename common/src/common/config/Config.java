@@ -1,4 +1,4 @@
-package app.config;
+package common.config;
 
 import java.io.*;
 import java.util.LinkedList;
@@ -6,9 +6,9 @@ import java.util.List;
 
 public class Config {
 
-    public Config() throws IOException {
+    public Config(String resourceName) throws IOException {
         ClassLoader ld = ClassLoader.getSystemClassLoader();
-        InputStream is = ld.getResourceAsStream("config.txt");
+        InputStream is = ld.getResourceAsStream(resourceName);
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         while (reader.ready()) {
             String line = reader.readLine();

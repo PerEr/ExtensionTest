@@ -2,7 +2,7 @@ package app.view;
 
 import api.services.Logger;
 import api.widget.WidgetRegistry;
-import app.config.Config;
+import common.config.Config;
 import common.plugin.PluginManager;
 import common.plugin.PluginManagerNotification;
 import common.plugin.ServiceRegistry;
@@ -30,7 +30,7 @@ public class AppFrame extends JFrame {
             }
         });
 
-        Config config = new Config();
+        Config config = new Config("config.txt");
 
         log("Loading plugins...");
         pluginManager.load(config.plugins());
