@@ -15,8 +15,9 @@ class CircleWidget extends JComponent {
     @Override
     public void paint(Graphics graphics) {
         super.paint(graphics);
-        graphics.setColor(Color.ORANGE);
-        graphics.drawOval(10, 10, 40, 40);
+        Dimension d = getSize();
+        graphics.setColor(++counter % 2 == 0 ? Color.ORANGE : Color.GREEN);
+        graphics.drawOval(0, 0, d.width, d.height);
     }
 
     @Override
@@ -31,6 +32,8 @@ class CircleWidget extends JComponent {
             return new CircleWidget();
         }
     }
+
+    int counter = 0;
 
     final static String NAME = new String("circle");
 }

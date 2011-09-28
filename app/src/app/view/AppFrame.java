@@ -48,7 +48,7 @@ public class AppFrame extends JFrame {
 
     private JComponent loadWidgets(String[] widgets) {
         final JPanel contentLayer = new JPanel(new GridLayout(1,4));
-        contentLayer.setSize(new Dimension(1024,768));
+        contentLayer.setSize(new Dimension(1024,200));
         contentLayer.setOpaque(false);
         for (String widget : widgets) {
             contentLayer.add(widgetFactory.instantiate(widget));
