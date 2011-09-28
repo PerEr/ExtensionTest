@@ -13,13 +13,13 @@ import java.util.List;
 public class SimpleShapesPlugin implements Plugin {
 
     public void load(ServiceRegistry registry) {
-        final WidgetRegistry widgetRegistry = (WidgetRegistry) registry.lookupService(WidgetRegistry.class);
-        registerBuilder(widgetRegistry, CircleWidget.NAME, new CircleWidget.Factory());
-        registerBuilder(widgetRegistry, SquareWidget.NAME, new SquareWidget.Factory());
     }
 
     @Override
     public void resolve(ServiceRegistry registry) {
+        final WidgetRegistry widgetRegistry = (WidgetRegistry) registry.lookupService(WidgetRegistry.class);
+        registerBuilder(widgetRegistry, CircleWidget.NAME, new CircleWidget.Factory());
+        registerBuilder(widgetRegistry, SquareWidget.NAME, new SquareWidget.Factory());
     }
 
     private void registerBuilder(final WidgetRegistry widgetRegistry, String name, final WidgetFactory factory) {
