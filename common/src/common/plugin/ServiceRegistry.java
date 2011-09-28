@@ -4,8 +4,15 @@ import java.util.*;
 
 public class ServiceRegistry implements api.plugin.ServiceRegistry {
 
-    public int publishService(Class cl, Object service) {
+    public void publishService(Class cl, Object service) {
+        assert cl.isInstance(service);
+        addService(cl, service);
+    }
+
+    @Override
+    public int publishService(Object service) {
         final Class interfaces[] = service.getClass().getInterfaces();
+        assert interfaces.length > 0;
         for (int ii=0 ; ii<interfaces.length ; ++ii) {
             addService(interfaces[ii], service);
         }

@@ -3,7 +3,6 @@ package usagereport;
 
 import api.plugin.Plugin;
 import api.plugin.ServiceRegistry;
-import api.services.UsageReport;
 
 public class UsageReportPlugin implements Plugin {
 
@@ -12,7 +11,7 @@ public class UsageReportPlugin implements Plugin {
         assert unpublisher == null;
 
         final HttpUsageReporter reporter = new HttpUsageReporter(registry);
-        registry.publishService(UsageReport.class, reporter);
+        registry.publishService(reporter);
 
         unpublisher = new Runnable() {
             public void run() {

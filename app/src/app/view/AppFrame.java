@@ -92,7 +92,7 @@ public class AppFrame extends JFrame {
 
     private ServiceRegistry buildServiceRegistry() {
         final ServiceRegistry registry = new ServiceRegistry();
-        registry.publishService(Logger.class, new Logger() {
+        registry.publishService(new Logger() {
             public void logError(String message) {
                 logInfo(message);
             }
@@ -105,7 +105,7 @@ public class AppFrame extends JFrame {
                 logInfo(message);
             }
         });
-        registry.publishService(WidgetRegistry.class, widgetFactory);
+        registry.publishService(widgetFactory);
         return registry;
     }
 

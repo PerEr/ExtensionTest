@@ -11,7 +11,7 @@ public class LogPlugin implements Plugin {
         assert unpublisher == null;
 
         final Logger logger = new BasicLogger();
-        registry.publishService(Logger.class, logger);
+        registry.publishService(logger);
 
         unpublisher = new Runnable() {
             public void run() {
