@@ -28,7 +28,7 @@ class ClockWidget extends JComponent {
 
     static final String NAME = "clock";
 
-    public ClockWidget() {
+    ClockWidget() {
         setPreferredSize(new Dimension(200,200));
         setOpaque(false);
 
