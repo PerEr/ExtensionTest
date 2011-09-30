@@ -7,11 +7,12 @@ app.register('connection.widget.ConnectionWidgetPlugin');
 
 app.loadAll();
 
-/*
-widget connection.status
-widget clock
-widget circle
-widget clock
-xwidget square
-xwidget connection.status
-  */
+var top = app.getLayout("top");
+
+top.add('connection.status');
+top.add('clock');
+top.add('circle');
+top.add('clock');
+top.add('square');
+top.add('connection.status');
+

@@ -3,7 +3,6 @@ package app.view;
 import api.services.Logger;
 import api.widget.WidgetRegistry;
 import app.base.SimpleScriptServices;
-import app.config.ScriptServices;
 import app.config.ScriptedConfig;
 import common.plugin.PluginManager;
 import common.plugin.PluginManagerNotification;
@@ -25,6 +24,7 @@ public class AppFrame extends JFrame {
     public AppFrame() throws IOException, ScriptException {
 
         JLayeredPane layers = setupLayers();
+        setContentPane(layers);
 
         addWindowListener(new WindowAdapter() {
 
@@ -33,43 +33,22 @@ public class AppFrame extends JFrame {
             }
         });
 
-        ScriptServices scriptServices = new SimpleScriptServices(pluginManager);
-        ScriptedConfig config = new ScriptedConfig("config.js", scriptServices);
+        SimpleScriptServices scriptServices = new SimpleScriptServices(pluginManager, widgetRegistry);
 
-/*
-        Config config = new ScriptedConfig("config.txt");
+        JPanel topPanel = buildTopPanel();
+        layers.add(topPanel, JLayeredPane.PALETTE_LAYER);
+        scriptServices.addLayout("top", topPanel);
 
-        log("Loading plugins...");
-        pluginManager.load(config.plugins());
-        log("Loaded plugins...");
-
-        final JComponent contentLayer = loadWidgets(config.widgets());
-*/
-        final JComponent contentLayer = loadWidgets(new String[] {});
-
-        layers.add(contentLayer, JLayeredPane.PALETTE_LAYER);
-
-        setContentPane(layers);
+        ScriptedConfig.load("config.js", scriptServices);
 
         setVisible(true);
-
-        Timer timer = new Timer(4000, new ActionListener() {
-            public void actionPerformed(ActionEvent actionEvent) {
-                onTimer();
-            }
-        });
-        timer.start();
-
     }
 
-    private JComponent loadWidgets(String[] widgets) {
-        final JPanel contentLayer = new JPanel(new GridLayout(1,4));
-        contentLayer.setSize(new Dimension(1024,200));
-        contentLayer.setOpaque(false);
-        for (String widget : widgets) {
-            contentLayer.add(widgetFactory.instantiate(widget));
-        }
-        return contentLayer;
+    private JPanel buildTopPanel() {
+        final JPanel panel = new JPanel(new FlowLayout());
+        panel.setSize(new Dimension(1024,200));
+        panel.setOpaque(false);
+        return panel;
     }
 
     private JLayeredPane setupLayers() {
@@ -112,21 +91,18 @@ public class AppFrame extends JFrame {
             }
 
             public void logInfo(String message) {
-                System.out.println("Ful-logger; " + message);
+                System.out.println(message);
             }
 
             public void logDebug(String message) {
                 logInfo(message);
             }
         });
-        registry.publishService(widgetFactory);
+        registry.publishService(widgetRegistry);
         return registry;
     }
 
-    private void onTimer() {
-    }
-
-    private final WidgetRegistry widgetFactory = new SimpleWidgetRegistry();
+    private final WidgetRegistry widgetRegistry = new SimpleWidgetRegistry();
     private final ServiceRegistry registry = buildServiceRegistry();
 
     private final PluginManager pluginManager = new PluginManager(registry, new PluginManagerNotification() {

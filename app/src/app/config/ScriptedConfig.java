@@ -1,13 +1,13 @@
 package app.config;
 
-import common.config.ResourceLoader;
+import common.util.ResourceLoader;
 
 import javax.script.*;
 import java.io.IOException;
 
 public class ScriptedConfig {
 
-    public ScriptedConfig(String scriptName, ScriptServices scriptServices) throws ScriptException, IOException {
+    public static void load(String scriptName, ScriptServices scriptServices) throws ScriptException, IOException {
 
         ScriptEngineManager factory = new ScriptEngineManager();
 
@@ -19,8 +19,6 @@ public class ScriptedConfig {
 
         String script = ResourceLoader.loadResource(scriptName);
         engine.eval(script);
-
-
     }
 
 }

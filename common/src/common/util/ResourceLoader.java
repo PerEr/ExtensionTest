@@ -1,6 +1,4 @@
-package common.config;
-
-import com.sun.tools.corba.se.idl.toJavaPortable.StringGen;
+package common.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
