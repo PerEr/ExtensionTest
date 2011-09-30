@@ -2,6 +2,7 @@ package app;
 
 import app.view.AppFrame;
 
+import javax.script.ScriptException;
 import javax.swing.SwingUtilities;
 import java.io.IOException;
 
@@ -13,6 +14,8 @@ public class Main {
                 try {
                     new AppFrame();
                 } catch (IOException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                } catch (ScriptException e) {
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
             }
