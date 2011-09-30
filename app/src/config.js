@@ -9,7 +9,7 @@ app.loadAll();
 
 var top = app.getLayout("top");
 
-top.add('connection.status');
+top.add('connection.status', 'host=127.0.0.1,port=12003');
 top.add('clock');
 top.add('circle');
 top.add('clock');
