@@ -186,7 +186,7 @@ class ClockWidget extends JComponent {
 
     static class Factory implements WidgetFactory {
         @Override
-        public JComponent instantiate() {
+        public JComponent instantiate(Properties prp) {
             return new ClockWidget();
         }
     }

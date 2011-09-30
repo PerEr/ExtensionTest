@@ -23,7 +23,7 @@ public class SimleLayoutArea implements LayoutArea {
     @Override
     public void add(String widgetName, String param) {
         Properties prp = propertiesFromString(param);
-        panel.add(registry.instantiate(widgetName));
+        panel.add(registry.instantiate(widgetName, prp));
     }
 
     private Properties propertiesFromString(String param)

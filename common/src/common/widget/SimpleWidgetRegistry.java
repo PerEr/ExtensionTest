@@ -36,14 +36,14 @@ public class SimpleWidgetRegistry implements WidgetRegistry {
         assert builders.size() < sz;
     }
 
-    public JComponent instantiate(String type) {
+    public JComponent instantiate(String type, Properties prp) {
         assert type != null;
 
         WidgetFactory factory = builders.get(type);
 
         assert factory != null;
 
-        return factory.instantiate();
+        return factory.instantiate(prp);
     }
 
     private final Map<String, WidgetFactory> builders = new HashMap<String, WidgetFactory>();

@@ -6,7 +6,7 @@ import connection.api.ConnectionMonitor;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Connection;
+import java.util.Properties;
 
 class ConnectionWidget extends JComponent {
 
@@ -58,7 +58,7 @@ class ConnectionWidget extends JComponent {
         }
 
         @Override
-        public JComponent instantiate() {
+        public JComponent instantiate(Properties prp) {
             return new ConnectionWidget(connectionMonitor);
         }
     }

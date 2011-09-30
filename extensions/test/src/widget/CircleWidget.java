@@ -5,10 +5,16 @@ import api.widget.WidgetFactory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Properties;
+
+import static java.lang.Integer.parseInt;
 
 class CircleWidget extends JComponent {
 
-    CircleWidget() {
+    private Color color;
+
+    CircleWidget(Color color) {
+        this.color = color;
         setOpaque(false);
     }
 
@@ -16,7 +22,7 @@ class CircleWidget extends JComponent {
     public void paint(Graphics graphics) {
         super.paint(graphics);
         Dimension d = getSize();
-        graphics.setColor(++counter % 2 == 0 ? Color.ORANGE : Color.GREEN);
+        graphics.setColor(color);
         graphics.drawOval(0, 0, d.width, d.height);
     }
 
@@ -28,12 +34,11 @@ class CircleWidget extends JComponent {
     static class Factory implements WidgetFactory {
 
         @Override
-        public JComponent instantiate() {
-            return new CircleWidget();
+        public JComponent instantiate(Properties prp) {
+            int colorAsInt = Integer.parseInt(prp.getProperty("color", "ff0000"), 16);
+            return new CircleWidget(new Color(colorAsInt));
         }
     }
-
-    int counter = 0;
 
     final static String NAME = new String("circle");
 }

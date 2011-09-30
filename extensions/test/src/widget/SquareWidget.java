@@ -4,6 +4,7 @@ import api.widget.WidgetFactory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Properties;
 
 
 class SquareWidget extends JComponent {
@@ -26,7 +27,7 @@ class SquareWidget extends JComponent {
 
     static class Factory implements WidgetFactory {
         @Override
-        public JComponent instantiate() {
+        public JComponent instantiate(Properties prp) {
             return new SquareWidget();
         }
     }
