@@ -21,7 +21,7 @@ public class AppFrame extends JFrame {
 
     public AppFrame() throws IOException, ScriptException {
 
-        Container container = getContentPane();
+        final Container container = getContentPane();
         container.setLayout(new BorderLayout());
 
         addWindowListener(new WindowAdapter() {
@@ -33,14 +33,21 @@ public class AppFrame extends JFrame {
 
         SimpleScriptServices scriptServices = new SimpleScriptServices(pluginManager, widgetRegistry);
 
-        JPanel topPanel = buildTopPanel();
+        final JPanel topPanel = buildHorizontalWidgetPanel();
         container.add(topPanel, BorderLayout.PAGE_START);
 
-        JPanel gamePanel = buildGamePanel();
+        final JPanel rightPanel = buildVerticalWidgetPanel();
+        container.add(rightPanel, BorderLayout.LINE_END);
+
+        final JPanel gamePanel = buildGamePanel();
         container.add(gamePanel, BorderLayout.CENTER);
 
+        final JPanel bottomPanel = buildHorizontalWidgetPanel();
+        container.add(bottomPanel, BorderLayout.PAGE_END);
+
         scriptServices.addLayout("top", topPanel);
-        scriptServices.addLayout("game", gamePanel);
+        scriptServices.addLayout("right", rightPanel);
+        scriptServices.addLayout("bottom", bottomPanel);
 
         ScriptedConfig.load("config.js", scriptServices);
 
@@ -48,8 +55,14 @@ public class AppFrame extends JFrame {
         setVisible(true);
     }
 
-    private JPanel buildTopPanel() {
+    private JPanel buildHorizontalWidgetPanel() {
         final JPanel panel = new JPanel(new FlowLayout());
+        panel.setOpaque(false);
+        return panel;
+    }
+
+    private JPanel buildVerticalWidgetPanel() {
+        final JPanel panel = new JPanel(new GridLayout(5,1));
         panel.setOpaque(false);
         return panel;
     }
