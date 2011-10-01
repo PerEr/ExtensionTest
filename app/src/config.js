@@ -10,7 +10,9 @@ app.loadAll();
 var top = app.getLayout("top");
 
 top.add('connection.status', 'host=127.0.0.1,port=12003');
-top.add('clock');
+top.add('clock','color=00ff00');
+top.add('clock','color=00ffff');
+top.add('clock','color=ffff00');
 top.add('circle', 'color=ff0000');
 top.add('circle', 'color=00ff00');
 top.add('connection.status');

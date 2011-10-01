@@ -27,8 +27,10 @@ class ClockWidget extends JComponent {
     private BufferedImage clockImage;     // Saved image of the clock face.
 
     static final String NAME = "clock";
+    private final Color color;
 
-    ClockWidget() {
+    ClockWidget(Color color) {
+        this.color = color;
         setPreferredSize(new Dimension(120,120));
         setOpaque(false);
 
@@ -105,7 +107,7 @@ class ClockWidget extends JComponent {
 
     private void drawClockFace(Graphics2D g2) {
         // ... Draw the clock face.  Probably into a buffer.
-        g2.setColor(Color.YELLOW);
+        g2.setColor(color);
         g2.fillOval(centerX-diameter/2, centerY-diameter/2, diameter, diameter);
         g2.setColor(Color.BLUE);
         g2.drawOval(centerX-diameter/2, centerY-diameter/2, diameter, diameter);
@@ -185,7 +187,8 @@ class ClockWidget extends JComponent {
     static class Factory implements WidgetFactory {
         @Override
         public JComponent instantiate(Properties prp) {
-            return new ClockWidget();
+            int colorAsInt = Integer.parseInt(prp.getProperty("color", "ffffff"), 16);
+            return new ClockWidget(new Color(colorAsInt));
         }
     }
 }

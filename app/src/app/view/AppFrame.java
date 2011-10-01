@@ -57,13 +57,13 @@ public class AppFrame extends JFrame {
 
     private JPanel buildHorizontalWidgetPanel() {
         final JPanel panel = new JPanel(new FlowLayout());
-        panel.setOpaque(false);
+        panel.setBackground(Color.BLACK);
         return panel;
     }
 
     private JPanel buildVerticalWidgetPanel() {
         final JPanel panel = new JPanel(new GridLayout(5,1));
-        panel.setOpaque(false);
+        panel.setBackground(Color.BLACK);
         return panel;
     }
 
