@@ -61,5 +61,5 @@ class ConnectionWidget extends JComponent {
     }
 
     private int okPercentage;
-    final static String NAME = new String("connection.status");
+    final static String NAME = "connection.status";
 }

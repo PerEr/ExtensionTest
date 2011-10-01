@@ -39,5 +39,5 @@ class SquareWidget extends JComponent {
         }
     }
 
-    final static String NAME = new String("square");
+    final static String NAME = "square";
 }

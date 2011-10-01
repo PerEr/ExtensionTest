@@ -19,7 +19,7 @@ class ClockWidget extends JComponent {
 
     private static final int    UPDATE_INTERVAL = 100;  // Millisecs
 
-    private Calendar calendar = Calendar.getInstance();  // Current time.
+    private final Calendar calendar = Calendar.getInstance();  // Current time.
 
     private int diameter;                 // Height and width of clock face
     private int centerX;                  // x coord of middle of clock
@@ -32,7 +32,7 @@ class ClockWidget extends JComponent {
         setPreferredSize(new Dimension(120,120));
         setOpaque(false);
 
-        javax.swing.Timer timer = new javax.swing.Timer(UPDATE_INTERVAL, new ActionListener() {
+        final javax.swing.Timer timer = new javax.swing.Timer(UPDATE_INTERVAL, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 updateTime();
                 repaint();
@@ -48,7 +48,7 @@ class ClockWidget extends JComponent {
 
     @Override
     public void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D)g;
+        final Graphics2D g2 = (Graphics2D)g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                             RenderingHints.VALUE_ANTIALIAS_ON);
 

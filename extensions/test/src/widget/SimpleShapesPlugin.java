@@ -6,7 +6,6 @@ import api.plugin.ServiceRegistry;
 import api.widget.WidgetFactory;
 import api.widget.WidgetRegistry;
 
-import javax.swing.*;
 import java.util.LinkedList;
 import java.util.List;
 

@@ -7,8 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Properties;
 
-import static java.lang.Integer.parseInt;
-
 class CircleWidget extends JComponent {
 
     private Color color;
@@ -42,5 +40,5 @@ class CircleWidget extends JComponent {
         }
     }
 
-    final static String NAME = new String("circle");
+    final static String NAME = "circle";
 }
