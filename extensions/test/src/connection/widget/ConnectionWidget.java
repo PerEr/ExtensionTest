@@ -45,11 +45,6 @@ class ConnectionWidget extends JComponent {
         graphics.fillRect(0, height - height*okPercentage/100, 10, height*okPercentage/100);
     }
 
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(10,200);
-    }
-
     static class Factory implements WidgetFactory {
         private ConnectionMonitor connectionMonitor;
 

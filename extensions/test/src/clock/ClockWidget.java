@@ -29,7 +29,7 @@ class ClockWidget extends JComponent {
     static final String NAME = "clock";
 
     ClockWidget() {
-        setPreferredSize(new Dimension(200,200));
+        setPreferredSize(new Dimension(120,120));
         setOpaque(false);
 
         javax.swing.Timer timer = new javax.swing.Timer(UPDATE_INTERVAL, new ActionListener() {
@@ -105,8 +105,6 @@ class ClockWidget extends JComponent {
 
     private void drawClockFace(Graphics2D g2) {
         // ... Draw the clock face.  Probably into a buffer.
-        g2.setColor(Color.BLACK);
-        g2.fillRect(0,0, getWidth(), getHeight());
         g2.setColor(Color.YELLOW);
         g2.fillOval(centerX-diameter/2, centerY-diameter/2, diameter, diameter);
         g2.setColor(Color.BLUE);

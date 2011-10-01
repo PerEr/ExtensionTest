@@ -23,6 +23,8 @@ class CircleWidget extends JComponent {
         super.paint(graphics);
         Dimension d = getSize();
         graphics.setColor(color);
+        graphics.fillOval(0, 0, d.width, d.height);
+        graphics.setColor(Color.BLACK);
         graphics.drawOval(0, 0, d.width, d.height);
     }
 

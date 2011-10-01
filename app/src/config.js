@@ -15,6 +15,8 @@ top.add('circle', 'color=ff0000');
 top.add('circle', 'color=00ff00');
 top.add('circle', 'color=0000ff');
 top.add('clock');
-top.add('square');
+top.add('square', 'color=ffff00');
+top.add('square', 'color=ff88ff');
+top.add('square', 'color=55ff33');
 top.add('connection.status');
 

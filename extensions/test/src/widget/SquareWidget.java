@@ -9,15 +9,21 @@ import java.util.Properties;
 
 class SquareWidget extends JComponent {
 
-    SquareWidget() {
+    private Color color;
+
+    SquareWidget(Color color) {
+        this.color = color;
         setOpaque(false);
     }
 
     @Override
     public void paint(Graphics graphics) {
         super.paint(graphics);
-        graphics.setColor(Color.WHITE);
-        graphics.drawRect(10, 10, 70, 70);
+        Dimension d = getSize();
+        graphics.setColor(color);
+        graphics.fillRect(0, 0, d.width, d.height);
+        graphics.setColor(Color.BLACK);
+        graphics.drawRect(0, 0, d.width, d.height);
     }
 
     @Override
@@ -28,7 +34,8 @@ class SquareWidget extends JComponent {
     static class Factory implements WidgetFactory {
         @Override
         public JComponent instantiate(Properties prp) {
-            return new SquareWidget();
+            int colorAsInt = Integer.parseInt(prp.getProperty("color", "ff0000"), 16);
+            return new SquareWidget(new Color(colorAsInt));
         }
     }
 
