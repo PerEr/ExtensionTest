@@ -10,12 +10,8 @@ import java.util.Properties;
 
 class ConnectionWidget extends JComponent {
 
-    ConnectionWidget() {
-        setOpaque(false);
-        okPercentage = 0;
-    }
-
     public ConnectionWidget(ConnectionMonitor connectionMonitor) {
+        setPreferredSize(new Dimension(20, 80));
         connectionMonitor.addListener(new ConnectionListener() {
             @Override
             public void onStateChange(int value) {
@@ -42,7 +38,13 @@ class ConnectionWidget extends JComponent {
             color = Color.GREEN;
 
         graphics.setColor(color);
-        graphics.fillRect(0, height - height*okPercentage/100, 10, height*okPercentage/100);
+        int y0 = height * okPercentage / 100;
+        int y1 = height - y0;
+        graphics.fillRect(0, y1, width, y0);
+        graphics.setColor(Color.BLUE);
+        graphics.drawRect(0, y1, width, y0);
+        graphics.setColor(Color.BLACK);
+        graphics.drawRect(0, 0, width, height);
     }
 
     static class Factory implements WidgetFactory {
