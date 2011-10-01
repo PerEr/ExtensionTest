@@ -22,21 +22,18 @@ public class SimleLayoutArea implements LayoutArea {
 
     @Override
     public void add(String widgetName, String param) {
-        Properties prp = propertiesFromString(param);
-        panel.add(registry.instantiate(widgetName, prp));
+        panel.add(registry.instantiate(widgetName, propertiesFromString(param)));
     }
 
     private Properties propertiesFromString(String param)
     {
-        String[] lines = param.split(",");
-        StringBuffer sb = new StringBuffer();
-        for (String line : lines) {
-            sb.append(line).append("\n");
-        }
-        Properties props = new Properties();
+        assert param != null;
+
+        final Properties props = new Properties();
+        // Replace commas with linefeeds
+        final String config = param.replace(',', '\n');
         try {
-            InputStream is = new ByteArrayInputStream(sb.toString().getBytes());
-            props.load(is);
+            props.load(new ByteArrayInputStream(config.getBytes()));
         } catch (IOException e) {
             // This should never happen!
             assert false;
@@ -45,5 +42,5 @@ public class SimleLayoutArea implements LayoutArea {
     }
 
     private final JPanel panel;
-    private WidgetRegistry registry;
+    private final WidgetRegistry registry;
 }
