@@ -21,8 +21,8 @@ public class AppFrame extends JFrame {
 
     public AppFrame() throws IOException, ScriptException {
 
-        JLayeredPane layers = setupLayers();
-        setContentPane(layers);
+        Container container = getContentPane();
+        container.setLayout(new BorderLayout());
 
         addWindowListener(new WindowAdapter() {
 
@@ -34,32 +34,28 @@ public class AppFrame extends JFrame {
         SimpleScriptServices scriptServices = new SimpleScriptServices(pluginManager, widgetRegistry);
 
         JPanel topPanel = buildTopPanel();
-        layers.add(topPanel, JLayeredPane.PALETTE_LAYER);
+        container.add(topPanel, BorderLayout.PAGE_START);
+
+        JPanel gamePanel = buildGamePanel();
+        container.add(gamePanel, BorderLayout.CENTER);
+
         scriptServices.addLayout("top", topPanel);
+        scriptServices.addLayout("game", gamePanel);
 
         ScriptedConfig.load("config.js", scriptServices);
 
+        setSize(new Dimension(1024, 920));
         setVisible(true);
     }
 
     private JPanel buildTopPanel() {
         final JPanel panel = new JPanel(new FlowLayout());
-        panel.setSize(new Dimension(1024,200));
         panel.setOpaque(false);
         return panel;
     }
 
-    private JLayeredPane setupLayers() {
-        final JLayeredPane layers = new JLayeredPane();
-
-        final ImagePanel imagePanel = new ImagePanel(loadImage("background.png"));
-        imagePanel.setSize(new Dimension(1024, 768));
-
-        layers.add(imagePanel, JLayeredPane.DEFAULT_LAYER);
-
-        setSize(imagePanel.getSize());
-
-        return layers;
+    private JPanel buildGamePanel() {
+        return new ImagePanel(loadImage("background.png"));
     }
 
     private Image loadImage(String imageName) {
