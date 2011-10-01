@@ -1,6 +1,12 @@
 package api.plugin;
 
+/**
+ * A registry for services within the application.
+ *
+ * @author Per Ersson
+ */
 public interface ServiceRegistry {
+
     /**
      * Publish an object as a specific service type
      * @param cl The service type
