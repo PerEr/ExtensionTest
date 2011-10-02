@@ -1,22 +1,21 @@
-package app.base;
+package app.config;
 
 import api.widget.WidgetRegistry;
-import app.config.LayoutArea;
 
 import javax.swing.*;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.Properties;
 
-public class SimleLayoutArea implements LayoutArea {
+public class BasicLayoutArea implements LayoutArea {
 
-    public SimleLayoutArea(JPanel panel, WidgetRegistry registry) {
+    public BasicLayoutArea(JPanel panel, WidgetRegistry registry) {
         this.panel = panel;
         this.registry = registry;
     }
 
     @Override
-    public void add(String widgetName)
-    {
+    public void add(String widgetName) {
         add(widgetName, "");
     }
 
@@ -25,8 +24,7 @@ public class SimleLayoutArea implements LayoutArea {
         panel.add(registry.instantiate(widgetName, propertiesFromString(param)));
     }
 
-    private Properties propertiesFromString(String param)
-    {
+    private Properties propertiesFromString(String param) {
         assert param != null;
 
         final Properties props = new Properties();

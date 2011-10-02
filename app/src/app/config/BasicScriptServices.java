@@ -1,8 +1,6 @@
-package app.base;
+package app.config;
 
 import api.widget.WidgetRegistry;
-import app.config.LayoutArea;
-import app.config.ScriptServices;
 import common.plugin.PluginManager;
 
 import javax.swing.*;
@@ -11,9 +9,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class SimpleScriptServices implements ScriptServices {
+public class BasicScriptServices implements ScriptServices {
 
-    public SimpleScriptServices(PluginManager pluginManager, WidgetRegistry registry) {
+    public BasicScriptServices(PluginManager pluginManager, WidgetRegistry registry) {
         this.pluginManager = pluginManager;
         this.registry = registry;
     }
@@ -36,7 +34,7 @@ public class SimpleScriptServices implements ScriptServices {
 
     public void addLayout(String name, JPanel panel) {
         assert layouts.get(name) == null;
-        layouts.put(name, new SimleLayoutArea(panel, registry));
+        layouts.put(name, new BasicLayoutArea(panel, registry));
     }
 
     private final PluginManager pluginManager;

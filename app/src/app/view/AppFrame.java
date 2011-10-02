@@ -2,7 +2,7 @@ package app.view;
 
 import api.services.Logger;
 import api.widget.WidgetRegistry;
-import app.base.SimpleScriptServices;
+import app.config.BasicScriptServices;
 import app.config.ScriptedConfig;
 import common.plugin.PluginManager;
 import common.plugin.PluginManagerNotification;
@@ -31,7 +31,7 @@ public class AppFrame extends JFrame {
             }
         });
 
-        SimpleScriptServices scriptServices = new SimpleScriptServices(pluginManager, widgetRegistry);
+        BasicScriptServices scriptServices = new BasicScriptServices(pluginManager, widgetRegistry);
 
         final JPanel topPanel = buildHorizontalWidgetPanel();
         container.add(topPanel, BorderLayout.PAGE_START);
@@ -62,7 +62,7 @@ public class AppFrame extends JFrame {
     }
 
     private JPanel buildVerticalWidgetPanel() {
-        final JPanel panel = new JPanel(new GridLayout(5,1));
+        final JPanel panel = new JPanel(new GridLayout(5, 1));
         panel.setBackground(Color.BLACK);
         return panel;
     }
