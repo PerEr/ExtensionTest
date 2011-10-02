@@ -1,4 +1,4 @@
-package app.config;
+package common.config;
 
 import api.widget.WidgetRegistry;
 import common.plugin.PluginManager;

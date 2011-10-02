@@ -1,6 +1,7 @@
 package common.plugin;
 
 import api.plugin.Plugin;
+import api.plugin.ServiceRegistry;
 
 import java.util.LinkedList;
 import java.util.List;

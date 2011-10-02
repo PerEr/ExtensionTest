@@ -1,4 +1,4 @@
-package app.config;
+package common.config;
 
 /**
  * The callback interface exposed to the javascript configuration file.

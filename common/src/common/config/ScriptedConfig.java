@@ -1,4 +1,4 @@
-package app.config;
+package common.config;
 
 import common.util.ResourceLoader;
 

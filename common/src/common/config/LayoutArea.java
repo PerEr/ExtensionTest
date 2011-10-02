@@ -1,4 +1,4 @@
-package app.config;
+package common.config;
 
 /**
  * The interface exposed to javascript to add widgets to a layout

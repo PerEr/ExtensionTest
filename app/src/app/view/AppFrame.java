@@ -2,11 +2,11 @@ package app.view;
 
 import api.services.Logger;
 import api.widget.WidgetRegistry;
-import app.config.BasicScriptServices;
-import app.config.ScriptedConfig;
+import common.config.BasicScriptServices;
+import common.config.ScriptedConfig;
 import common.plugin.PluginManager;
 import common.plugin.PluginManagerNotification;
-import common.plugin.ServiceRegistry;
+import common.plugin.BasicServiceRegistry;
 import common.widget.SimpleWidgetRegistry;
 
 import javax.script.ScriptException;
@@ -90,8 +90,8 @@ public class AppFrame extends JFrame {
         logger.logInfo(message);
     }
 
-    private ServiceRegistry buildServiceRegistry() {
-        final ServiceRegistry registry = new ServiceRegistry();
+    private BasicServiceRegistry buildServiceRegistry() {
+        final BasicServiceRegistry registry = new BasicServiceRegistry();
         registry.publishService(new Logger() {
             public void logError(String message) {
                 logInfo(message);
@@ -110,7 +110,7 @@ public class AppFrame extends JFrame {
     }
 
     private final WidgetRegistry widgetRegistry = new SimpleWidgetRegistry();
-    private final ServiceRegistry registry = buildServiceRegistry();
+    private final BasicServiceRegistry registry = buildServiceRegistry();
 
     private final PluginManager pluginManager = new PluginManager(registry, new PluginManagerNotification() {
         public void onLoadFailure(String classname, Exception e) {
