@@ -2,7 +2,10 @@ package app.config;
 
 import common.util.ResourceLoader;
 
-import javax.script.*;
+import javax.script.ScriptContext;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.io.IOException;
 
 public class ScriptedConfig {

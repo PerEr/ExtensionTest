@@ -6,6 +6,7 @@ package app.config;
 public interface ScriptServices {
     /**
      * Register a plugin
+     *
      * @param pluginName The plugin classname
      */
     void register(String pluginName);
@@ -17,6 +18,7 @@ public interface ScriptServices {
 
     /**
      * Get hold of a named layout area
+     *
      * @param str The name of the layout area
      * @return A layout area that can be populated with widgets.
      */
