@@ -31,22 +31,28 @@ public class TestFrame extends JFrame {
             }
         });
 
+        logPanel = new JList(logModel);
+        logPanel.setPreferredSize(new Dimension(250, 300));
+
+        container.add(logPanel, BorderLayout.LINE_START);
+
         Panel controlPanel = new Panel(new FlowLayout());
 
-        label = new JLabel();
-        label.setPreferredSize(new Dimension(400, 20));
-        controlPanel.add(label);
-
-
-        pluginName = new JTextField("");
-        pluginName.setPreferredSize(new Dimension(200, 20));
-        controlPanel.add(pluginName);
+        inputField = new JTextField("");
+        inputField.setPreferredSize(new Dimension(400, 40));
+        controlPanel.add(inputField);
+        inputField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                pluginManager.load(new String[]{inputField.getText()});
+            }
+        });
 
         JButton loadButton = new JButton("Load plugin");
         loadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                pluginManager.load(new String[]{pluginName.getText()});
+                pluginManager.load(new String[]{inputField.getText()});
             }
         });
         controlPanel.add(loadButton);
@@ -55,7 +61,7 @@ public class TestFrame extends JFrame {
         instantiateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                JComponent widget = widgetRegistry.instantiate(pluginName.getText(), new Properties());
+                JComponent widget = widgetRegistry.instantiate(inputField.getText(), new Properties());
                 widget.setVisible(true);
                 container.add(widget, BorderLayout.CENTER);
                 pack();
@@ -76,7 +82,7 @@ public class TestFrame extends JFrame {
     private void log(String message) {
         final Logger logger = (Logger) registry.lookupService(Logger.class);
         logger.logInfo(message);
-        label.setText(message);
+        logModel.addElement(message);
     }
 
     private ServiceRegistry buildServiceRegistry() {
@@ -108,10 +114,12 @@ public class TestFrame extends JFrame {
 
         public void onLoaded(String className) {
             log("Loaded " + className);
+            inputField.setText("");
         }
     });
 
-    private JLabel label;
-    private final JTextField pluginName;
+    private final JTextField inputField;
+    private JList logPanel;
 
+    private DefaultListModel logModel = new DefaultListModel();
 }
