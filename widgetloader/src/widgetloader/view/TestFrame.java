@@ -31,14 +31,12 @@ public class TestFrame extends JFrame {
             }
         });
 
-        logPanel = new JList(logModel);
         logPanel.setPreferredSize(new Dimension(250, 300));
 
         container.add(logPanel, BorderLayout.LINE_START);
 
-        Panel controlPanel = new Panel(new FlowLayout());
+        final Panel controlPanel = new Panel(new FlowLayout());
 
-        inputField = new JTextField("");
         inputField.setPreferredSize(new Dimension(400, 40));
         controlPanel.add(inputField);
         inputField.addActionListener(new ActionListener() {
@@ -48,7 +46,7 @@ public class TestFrame extends JFrame {
             }
         });
 
-        JButton loadButton = new JButton("Load plugin");
+        final JButton loadButton = new JButton("Load plugin");
         loadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -57,7 +55,7 @@ public class TestFrame extends JFrame {
         });
         controlPanel.add(loadButton);
 
-        JButton instantiateButton = new JButton("Instantiate");
+        final JButton instantiateButton = new JButton("Instantiate");
         instantiateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -71,7 +69,15 @@ public class TestFrame extends JFrame {
 
         container.add(controlPanel, BorderLayout.PAGE_END);
 
-
+        final Timer timer = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (inputField.hasFocus() == false) {
+                    inputField.requestFocus();
+                }
+            }
+        });
+        timer.start();
         pack();
         setVisible(true);
     }
@@ -110,16 +116,18 @@ public class TestFrame extends JFrame {
     private final PluginManager pluginManager = new PluginManager(registry, new PluginManagerNotification() {
         public void onLoadFailure(String classname, Exception e) {
             log("Failed to load " + classname);
+            inputField.requestFocus();
         }
 
         public void onLoaded(String className) {
             log("Loaded " + className);
             inputField.setText("");
+            inputField.requestFocus();
         }
     });
 
-    private final JTextField inputField;
-    private JList logPanel;
+    private final JTextField inputField = new JTextField("");
 
     private DefaultListModel logModel = new DefaultListModel();
+    private JList logPanel = new JList(logModel);
 }
