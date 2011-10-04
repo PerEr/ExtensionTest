@@ -7,6 +7,7 @@ import common.plugin.BasicServiceRegistry;
 import common.plugin.PluginManager;
 import common.plugin.PluginManagerNotification;
 import common.plugin.ServiceRegistryNotification;
+import common.util.PropertyBuilder;
 import common.widget.SimpleWidgetRegistry;
 import common.widget.WidgetRegistryNotification;
 
@@ -94,7 +95,15 @@ public class TestFrame extends JFrame {
     }
 
     private void onWidgetSelected(String text) {
-        JComponent widget = widgetRegistry.instantiate(text, new Properties());
+        String widgetName = text;
+        String parameters = "";
+
+        int ix = text.indexOf(",");
+        if (ix > 0) {
+            widgetName = text.substring(0,ix);
+            parameters = text.substring(ix+1);
+        }
+        JComponent widget = widgetRegistry.instantiate(widgetName, PropertyBuilder.fromString(parameters));
         widget.setVisible(true);
         JFrame widgetFrame = new JFrame();
         widgetFrame.getContentPane().add(widget, BorderLayout.CENTER);
