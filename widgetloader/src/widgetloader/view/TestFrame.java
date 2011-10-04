@@ -9,6 +9,7 @@ import common.plugin.PluginManagerNotification;
 import common.widget.SimpleWidgetRegistry;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,9 +22,6 @@ public class TestFrame extends JFrame {
 
     public TestFrame() throws IOException {
 
-        final Container container = getContentPane();
-        container.setLayout(new BorderLayout());
-
         addWindowListener(new WindowAdapter() {
 
             public void windowClosing(WindowEvent we) {
@@ -31,14 +29,37 @@ public class TestFrame extends JFrame {
             }
         });
 
-        logPanel.setPreferredSize(new Dimension(250, 300));
+        final Container container = getContentPane();
+        container.setLayout(new BorderLayout());
 
-        container.add(logPanel, BorderLayout.LINE_START);
+        statusLine.setPreferredSize(new Dimension(400,20));
+        container.add(statusLine, BorderLayout.PAGE_START);
 
-        final Panel controlPanel = new Panel(new FlowLayout());
+        widgets.setPreferredSize(new Dimension(400,400));
+        container.add(widgets, BorderLayout.CENTER);
+
+        container.add(buildControlPanel(), BorderLayout.PAGE_END);
+
+        final Timer timer = new Timer(500, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (inputField.hasFocus() == false) {
+                    inputField.requestFocus();
+                }
+            }
+        });
+        timer.start();
+
+        pack();
+        setVisible(true);
+    }
+
+    private JPanel buildControlPanel() {
+
+        final JPanel panel = new JPanel(new FlowLayout());
 
         inputField.setPreferredSize(new Dimension(400, 40));
-        controlPanel.add(inputField);
+        panel.add(inputField);
         inputField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -53,33 +74,27 @@ public class TestFrame extends JFrame {
                 pluginManager.load(new String[]{inputField.getText()});
             }
         });
-        controlPanel.add(loadButton);
+        panel.add(loadButton);
 
         final JButton instantiateButton = new JButton("Instantiate");
         instantiateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                JComponent widget = widgetRegistry.instantiate(inputField.getText(), new Properties());
-                widget.setVisible(true);
-                container.add(widget, BorderLayout.CENTER);
-                pack();
+                onWidgetSelected(inputField.getText());
             }
         });
-        controlPanel.add(instantiateButton);
+        panel.add(instantiateButton);
 
-        container.add(controlPanel, BorderLayout.PAGE_END);
+        return panel;
+    }
 
-        final Timer timer = new Timer(500, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                if (inputField.hasFocus() == false) {
-                    inputField.requestFocus();
-                }
-            }
-        });
-        timer.start();
-        pack();
-        setVisible(true);
+    private void onWidgetSelected(String text) {
+        JComponent widget = widgetRegistry.instantiate(text, new Properties());
+        widget.setVisible(true);
+        JFrame widgetFrame = new JFrame();
+        widgetFrame.getContentPane().add(widget, BorderLayout.CENTER);
+        widgetFrame.pack();
+        widgetFrame.setVisible(true);
     }
 
     private void shutdown() {
@@ -88,7 +103,7 @@ public class TestFrame extends JFrame {
     private void log(String message) {
         final Logger logger = (Logger) registry.lookupService(Logger.class);
         logger.logInfo(message);
-        logModel.addElement(message);
+        statusLine.setText(message);
     }
 
     private ServiceRegistry buildServiceRegistry() {
@@ -128,6 +143,8 @@ public class TestFrame extends JFrame {
 
     private final JTextField inputField = new JTextField("");
 
-    private DefaultListModel logModel = new DefaultListModel();
-    private JList logPanel = new JList(logModel);
+    private final ListModel widgetModel = new DefaultListModel();
+    private final JList widgets = new JList(widgetModel);
+
+    private JLabel statusLine = new JLabel();
 }
