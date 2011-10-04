@@ -1,13 +1,13 @@
 package common.config;
 
 import api.widget.WidgetRegistry;
+import common.util.PropertyBuilder;
 
 import javax.swing.*;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.util.Properties;
 
 public class BasicLayoutArea implements LayoutArea {
+
+    private final PropertyBuilder propertyBuilder = new PropertyBuilder();
 
     public BasicLayoutArea(JPanel panel, WidgetRegistry registry) {
         this.panel = panel;
@@ -21,22 +21,7 @@ public class BasicLayoutArea implements LayoutArea {
 
     @Override
     public void add(String widgetName, String param) {
-        panel.add(registry.instantiate(widgetName, propertiesFromString(param)));
-    }
-
-    private Properties propertiesFromString(String param) {
-        assert param != null;
-
-        final Properties props = new Properties();
-        // Replace commas with linefeeds
-        final String config = param.replace(',', '\n');
-        try {
-            props.load(new ByteArrayInputStream(config.getBytes()));
-        } catch (IOException e) {
-            // This should never happen!
-            assert false;
-        }
-        return props;
+        panel.add(registry.instantiate(widgetName, PropertyBuilder.fromString(param)));
     }
 
     private final JPanel panel;
