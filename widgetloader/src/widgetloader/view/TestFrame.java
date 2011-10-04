@@ -8,8 +8,10 @@ import common.plugin.PluginManager;
 import common.plugin.PluginManagerNotification;
 import common.plugin.ServiceRegistryNotification;
 import common.widget.SimpleWidgetRegistry;
+import common.widget.WidgetRegistryNotification;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,11 +34,14 @@ public class TestFrame extends JFrame {
         final Container container = getContentPane();
         container.setLayout(new BorderLayout());
 
-        statusLine.setPreferredSize(new Dimension(400,20));
+        statusLine.setPreferredSize(new Dimension(400, 20));
         container.add(statusLine, BorderLayout.PAGE_START);
 
-        serviceList.setPreferredSize(new Dimension(400,400));
+        serviceList.setPreferredSize(new Dimension(400, 400));
         container.add(serviceList, BorderLayout.CENTER);
+
+        widgetList.setPreferredSize(new Dimension(400, 400));
+        container.add(widgetList, BorderLayout.LINE_END);
 
         container.add(buildControlPanel(), BorderLayout.PAGE_END);
 
@@ -101,7 +106,7 @@ public class TestFrame extends JFrame {
     }
 
     private void log(String message) {
-        final Logger logger = (Logger) registry.lookupService(Logger.class);
+        final Logger logger = (Logger) serviceRegistry.lookupService(Logger.class);
         logger.logInfo(message);
         statusLine.setText(message);
     }
@@ -139,13 +144,45 @@ public class TestFrame extends JFrame {
         return registry;
     }
 
+    private WidgetRegistry buildWidgetRegistry() {
+        SimpleWidgetRegistry registry = new SimpleWidgetRegistry();
+        registry.addListener(new WidgetRegistryNotification() {
+            @Override
+            public void onWidgetPublished(String type) {
+                widgetModel.addElement(type);
+            }
+
+            @Override
+            public void onWidgetUnpublished(String type) {
+                widgetModel.removeElement(type);
+            }
+
+            @Override
+            public void onRegistryDispose() {
+            }
+        });
+        return registry;
+    }
+
+    private JList buildJList(ListModel model, String title) {
+        JList list = new JList(model);
+        TitledBorder border = BorderFactory.createTitledBorder(title);
+        list.setBorder(border);
+        return list;
+    }
+
+    // Widgets
+    private final DefaultListModel widgetModel = new DefaultListModel();
+    private final JList widgetList = buildJList(widgetModel, "Widgets");
+
+    private final WidgetRegistry widgetRegistry = buildWidgetRegistry();
+
+    // Services
     private final DefaultListModel serviceModel = new DefaultListModel();
-    private final JList serviceList = new JList(serviceModel);
+    private final JList serviceList = buildJList(serviceModel, "Services");
+    private final ServiceRegistry serviceRegistry = buildServiceRegistry();
 
-    private final WidgetRegistry widgetRegistry = new SimpleWidgetRegistry();
-    private final ServiceRegistry registry = buildServiceRegistry();
-
-    private final PluginManager pluginManager = new PluginManager(registry, new PluginManagerNotification() {
+    private final PluginManager pluginManager = new PluginManager(serviceRegistry, new PluginManagerNotification() {
         public void onLoadFailure(String classname, Exception e) {
             log("Failed to load " + classname);
             inputField.requestFocus();

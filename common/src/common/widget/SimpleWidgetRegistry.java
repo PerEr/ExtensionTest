@@ -14,6 +14,10 @@ public class SimpleWidgetRegistry implements WidgetRegistry {
         assert builders.get(type) == null;
 
         builders.put(type, factory);
+
+        for (WidgetRegistryNotification listener : listeners) {
+            listener.onWidgetPublished(type);
+        }
     }
 
     public void unregisterWidgetFactory(WidgetFactory factory) {
@@ -31,6 +35,9 @@ public class SimpleWidgetRegistry implements WidgetRegistry {
 
         for (String key : keys) {
             builders.remove(key);
+            for (WidgetRegistryNotification listener : listeners) {
+                listener.onWidgetUnpublished(key);
+            }
         }
 
         assert builders.size() < sz;
@@ -46,5 +53,16 @@ public class SimpleWidgetRegistry implements WidgetRegistry {
         return factory.instantiate(prp);
     }
 
+    public void addListener(WidgetRegistryNotification listener) {
+        listeners.add(listener);
+    }
+
+    public void removeListener(WidgetRegistryNotification listener) {
+        int sz = listeners.size();
+        listeners.remove(listener);
+        assert listeners.size() + 1 == sz;
+    }
+
     private final Map<String, WidgetFactory> builders = new HashMap<String, WidgetFactory>();
+    private final List<WidgetRegistryNotification> listeners = new LinkedList<WidgetRegistryNotification>();
 }
