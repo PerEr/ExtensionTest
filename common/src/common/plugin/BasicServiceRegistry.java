@@ -26,6 +26,9 @@ public class BasicServiceRegistry implements api.plugin.ServiceRegistry {
             services.remove(service);
             count += sz - services.size();
         }
+        for (ServiceRegistryNotification listener : listeners) {
+            listener.onServiceUnpublished(service);
+        }
         return count;
     }
 
@@ -34,9 +37,21 @@ public class BasicServiceRegistry implements api.plugin.ServiceRegistry {
     }
 
     public void dispose() {
+        for (ServiceRegistryNotification listener : listeners) {
+            listener.onRegistryDispose();
+        }
         servicesMap.clear();
     }
 
+    public void addListener(ServiceRegistryNotification listener) {
+        listeners.add(listener);
+    }
+
+    public void removeListener(ServiceRegistryNotification listener) {
+        int sz = listeners.size();
+        listeners.remove(listener);
+        assert listeners.size() + 1 == sz;
+    }
 
     private void addService(Class serviceType, Object service) {
         Deque<Object> entry = servicesMap.get(serviceType);
@@ -45,7 +60,13 @@ public class BasicServiceRegistry implements api.plugin.ServiceRegistry {
             servicesMap.put(serviceType, entry);
         }
         entry.addFirst(service);
+
+        // Notify all listeners
+        for (ServiceRegistryNotification listener : listeners) {
+            listener.onServicePublished(serviceType, service);
+        }
     }
 
     private final Map<Class, Deque<Object>> servicesMap = new HashMap<Class, Deque<Object>>();
+    private final List<ServiceRegistryNotification> listeners = new LinkedList<ServiceRegistryNotification>();
 }
