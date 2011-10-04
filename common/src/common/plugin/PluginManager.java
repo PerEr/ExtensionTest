@@ -14,13 +14,16 @@ public class PluginManager {
     }
 
     public void load(String[] classNames) {
+
+        final List<Plugin> newPlugins = new LinkedList<Plugin>();
+
         // Publish services
         for (final String className : classNames) {
             try {
                 final Class cl = Class.forName(className);
                 Plugin plugin = (Plugin) cl.newInstance();
                 plugin.load(registry);
-                plugins.add(plugin);
+                newPlugins.add(plugin);
                 notification.onLoaded(className);
             } catch (Exception e) {
                 notification.onLoadFailure(className, e);
@@ -28,8 +31,9 @@ public class PluginManager {
         }
 
         // Resolve intra-plugin dependencies
-        for (final Plugin plugin : plugins) {
+        for (final Plugin plugin : newPlugins) {
             plugin.resolve(registry);
+            plugins.add(plugin);
         }
 
     }
