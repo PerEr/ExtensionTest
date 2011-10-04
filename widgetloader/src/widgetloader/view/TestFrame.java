@@ -6,10 +6,10 @@ import api.widget.WidgetRegistry;
 import common.plugin.BasicServiceRegistry;
 import common.plugin.PluginManager;
 import common.plugin.PluginManagerNotification;
+import common.plugin.ServiceRegistryNotification;
 import common.widget.SimpleWidgetRegistry;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,8 +35,8 @@ public class TestFrame extends JFrame {
         statusLine.setPreferredSize(new Dimension(400,20));
         container.add(statusLine, BorderLayout.PAGE_START);
 
-        widgets.setPreferredSize(new Dimension(400,400));
-        container.add(widgets, BorderLayout.CENTER);
+        serviceList.setPreferredSize(new Dimension(400,400));
+        container.add(serviceList, BorderLayout.CENTER);
 
         container.add(buildControlPanel(), BorderLayout.PAGE_END);
 
@@ -107,7 +107,21 @@ public class TestFrame extends JFrame {
     }
 
     private ServiceRegistry buildServiceRegistry() {
-        final ServiceRegistry registry = new BasicServiceRegistry();
+        final BasicServiceRegistry registry = new BasicServiceRegistry();
+        registry.addListener(new ServiceRegistryNotification() {
+            @Override
+            public void onServicePublished(Class serviceType, Object service) {
+                serviceModel.addElement(serviceType.getCanonicalName());
+            }
+
+            @Override
+            public void onServiceUnpublished(Object service) {
+            }
+
+            @Override
+            public void onRegistryDispose() {
+            }
+        });
         registry.publishService(new Logger() {
             public void logError(String message) {
                 logInfo(message);
@@ -124,6 +138,9 @@ public class TestFrame extends JFrame {
         registry.publishService(widgetRegistry);
         return registry;
     }
+
+    private final DefaultListModel serviceModel = new DefaultListModel();
+    private final JList serviceList = new JList(serviceModel);
 
     private final WidgetRegistry widgetRegistry = new SimpleWidgetRegistry();
     private final ServiceRegistry registry = buildServiceRegistry();
@@ -142,9 +159,6 @@ public class TestFrame extends JFrame {
     });
 
     private final JTextField inputField = new JTextField("");
-
-    private final ListModel widgetModel = new DefaultListModel();
-    private final JList widgets = new JList(widgetModel);
 
     private JLabel statusLine = new JLabel();
 }
