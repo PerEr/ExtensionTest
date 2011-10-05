@@ -5,7 +5,10 @@
       <module fileurl="file://$PROJECT_DIR$/api/api.iml" filepath="$PROJECT_DIR$/api/api.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
-      <module fileurl="file://$PROJECT_DIR$/extensions/test/test.iml" filepath="$PROJECT_DIR$/extensions/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/extensions/clock/extension_clock.iml" filepath="$PROJECT_DIR$/extensions/clock/extension_clock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/extensions/connection/extension_connection.iml" filepath="$PROJECT_DIR$/extensions/connection/extension_connection.iml" />
+      <module fileurl="file://$PROJECT_DIR$/extensions/log/extension_log.iml" filepath="$PROJECT_DIR$/extensions/log/extension_log.iml" />
+      <module fileurl="file://$PROJECT_DIR$/extensions/shapes/extension_shapes.iml" filepath="$PROJECT_DIR$/extensions/shapes/extension_shapes.iml" />
       <module fileurl="file://$PROJECT_DIR$/widgetloader/widgetloader.iml" filepath="$PROJECT_DIR$/widgetloader/widgetloader.iml" />
     </modules>
   </component>

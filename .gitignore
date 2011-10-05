@@ -2,3 +2,5 @@ out/
 .DS_Store
 workspace.xml
 originals
+artifacts
+
