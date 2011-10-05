@@ -3,6 +3,7 @@ app.register('shapes.SimpleShapesPlugin');
 app.register('clock.ClockPlugin');
 app.register('connection.monitor.ConnectionMonitorPlugin');
 app.register('connection.widget.ConnectionWidgetPlugin');
+app.register('qa.QaPlugin');
 
 app.loadAll();
 
@@ -31,7 +32,6 @@ bottom.add('clock');
 bottom.add('connection.status', 'host=127.0.0.1,port=12003');
 bottom.add('circle', 'color=ff0000');
 bottom.add('square', 'color=55ff33');
-bottom.add('connection.status', 'host=127.0.0.1,port=12003');
-bottom.add('circle', 'color=00ff00');
+bottom.add('add_widget');
 
 

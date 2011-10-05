@@ -8,12 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="api" />
-    <orderEntry type="module" module-name="common" />
-    <orderEntry type="module" module-name="extension_clock" />
-    <orderEntry type="module" module-name="extension_connection" />
-    <orderEntry type="module" module-name="extension_log" />
-    <orderEntry type="module" module-name="extension_shapes" />
-    <orderEntry type="module" module-name="extension_qa" />
   </component>
 </module>
 
