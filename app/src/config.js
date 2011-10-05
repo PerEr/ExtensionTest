@@ -1,6 +1,5 @@
 app.register('log.LogPlugin');
-app.register('usagereport.UsageReportPlugin');
-app.register('widget.SimpleShapesPlugin');
+app.register('shapes.SimpleShapesPlugin');
 app.register('clock.ClockPlugin');
 app.register('connection.monitor.ConnectionMonitorPlugin');
 app.register('connection.widget.ConnectionWidgetPlugin');

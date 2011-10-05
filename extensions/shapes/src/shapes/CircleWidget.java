@@ -1,4 +1,5 @@
-package widget;
+package shapes;
+
 
 import api.widget.WidgetFactory;
 
@@ -6,12 +7,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Properties;
 
-
-class SquareWidget extends JComponent {
+class CircleWidget extends JComponent {
 
     private Color color;
 
-    SquareWidget(Color color) {
+    CircleWidget(Color color) {
         this.color = color;
         setOpaque(false);
     }
@@ -21,9 +21,9 @@ class SquareWidget extends JComponent {
         super.paint(graphics);
         Dimension d = getSize();
         graphics.setColor(color);
-        graphics.fillRect(0, 0, d.width, d.height);
+        graphics.fillOval(0, 0, d.width, d.height);
         graphics.setColor(Color.BLACK);
-        graphics.drawRect(0, 0, d.width, d.height);
+        graphics.drawOval(0, 0, d.width, d.height);
     }
 
     @Override
@@ -32,12 +32,13 @@ class SquareWidget extends JComponent {
     }
 
     static class Factory implements WidgetFactory {
+
         @Override
         public JComponent instantiate(Properties prp) {
             int colorAsInt = Integer.parseInt(prp.getProperty("color", "ff0000"), 16);
-            return new SquareWidget(new Color(colorAsInt));
+            return new CircleWidget(new Color(colorAsInt));
         }
     }
 
-    final static String NAME = "square";
+    final static String NAME = "circle";
 }

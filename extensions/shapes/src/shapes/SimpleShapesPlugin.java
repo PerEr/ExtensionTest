@@ -1,4 +1,4 @@
-package widget;
+package shapes;
 
 
 import api.plugin.Plugin;
