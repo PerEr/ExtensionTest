@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Class-Path: common.jar clock.jar logger.jar shapes.jar connection_moni
+ tor.jar
+Main-Class: app.Main
+
