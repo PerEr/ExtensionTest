@@ -69,7 +69,7 @@ public class TestFrame extends JFrame {
         inputField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                pluginManager.load(new String[]{inputField.getText()});
+                pluginManager.load(new String[]{inputField.getText().trim()});
             }
         });
 
@@ -77,7 +77,7 @@ public class TestFrame extends JFrame {
         loadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                pluginManager.load(new String[]{inputField.getText()});
+                pluginManager.load(new String[]{inputField.getText().trim()});
             }
         });
         panel.add(loadButton);
@@ -86,7 +86,7 @@ public class TestFrame extends JFrame {
         instantiateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                onWidgetSelected(inputField.getText());
+                onWidgetSelected(inputField.getText().trim());
             }
         });
         panel.add(instantiateButton);
