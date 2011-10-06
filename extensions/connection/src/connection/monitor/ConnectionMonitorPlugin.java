@@ -9,7 +9,7 @@ public class ConnectionMonitorPlugin implements Plugin {
     @Override
     public void load(final ServiceRegistry registry) {
 
-        final ConnectionMonitor monitor = new ConnectionMonitorImpl();
+        final ConnectionMonitorImpl monitor = new ConnectionMonitorImpl();
 
         registry.publishService(monitor);
 
@@ -17,6 +17,7 @@ public class ConnectionMonitorPlugin implements Plugin {
             @Override
             public void run() {
                 registry.unpublishService(monitor);
+                monitor.dispose();
             }
         };
 

@@ -3,22 +3,17 @@ package connection.widget;
 import api.widget.WidgetFactory;
 import connection.api.ConnectionListener;
 import connection.api.ConnectionMonitor;
+import sun.rmi.transport.Connection;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Properties;
 
-class ConnectionWidget extends JComponent {
+class ConnectionWidget extends JComponent implements ConnectionListener {
 
     public ConnectionWidget(ConnectionMonitor connectionMonitor) {
         setPreferredSize(new Dimension(20, 80));
-        connectionMonitor.addListener(new ConnectionListener() {
-            @Override
-            public void onStateChange(int value) {
-                okPercentage = value;
-                repaint();
-            }
-        });
+        connectionMonitor.addListener(this);
 
     }
 
@@ -45,6 +40,13 @@ class ConnectionWidget extends JComponent {
         graphics.drawRect(0, y1, width, y0);
         graphics.setColor(Color.BLACK);
         graphics.drawRect(0, 0, width, height);
+    }
+
+    @Override
+    public void onStateChange(int okPercentage)
+    {
+        this.okPercentage = okPercentage;
+        repaint();
     }
 
     static class Factory implements WidgetFactory {
