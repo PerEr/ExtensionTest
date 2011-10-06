@@ -1,6 +1,8 @@
 package qa;
 
 import api.plugin.ServiceRegistry;
+import api.widget.WidgetArea;
+import api.widget.WidgetAreaRegistry;
 import api.widget.WidgetFactory;
 
 import javax.swing.*;
@@ -9,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Properties;
 
-class AddWidgetWidget extends JButton {
+class AddWidgetWidget extends JButton implements WidgetChoiceListener {
 
     public AddWidgetWidget(final ServiceRegistry serviceRegistry, Properties prp) {
         this.serviceRegistry = serviceRegistry;
@@ -24,12 +26,18 @@ class AddWidgetWidget extends JButton {
     }
 
     private void onClick() {
-        JFrame frame = (JFrame) serviceRegistry.lookupService(JFrame.class);
-        WidgetNameDialog myDialog = new WidgetNameDialog(frame, "Do you like Java?");
-        //final WidgetRegistry widgetRegistry = (WidgetRegistry) serviceRegistry.lookupService(WidgetRegistry.class);
+        final JFrame frame = (JFrame) serviceRegistry.lookupService(JFrame.class);
+        new WidgetNameDialog(frame, this);
     }
 
     private ServiceRegistry serviceRegistry;
+
+    @Override
+    public void onChoice(String choice) {
+        final WidgetAreaRegistry areaRegistry = (WidgetAreaRegistry) serviceRegistry.lookupService(WidgetAreaRegistry.class);
+        WidgetArea widgetArea = areaRegistry.lookup("bottom");  // TODO
+        widgetArea.add(choice);
+    }
 
     static class Factory implements WidgetFactory {
 

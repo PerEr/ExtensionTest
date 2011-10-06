@@ -1,19 +1,17 @@
 package common.config;
 
-import api.widget.WidgetRegistry;
+import api.widget.WidgetArea;
+import api.widget.WidgetAreaRegistry;
 import common.plugin.PluginManager;
 
-import javax.swing.*;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class BasicScriptServices implements ScriptServices {
 
-    public BasicScriptServices(PluginManager pluginManager, WidgetRegistry registry) {
+    public BasicScriptServices(PluginManager pluginManager, WidgetAreaRegistry widgetAreaRegistry) {
         this.pluginManager = pluginManager;
-        this.registry = registry;
+        this.widgetAreaRegistry = widgetAreaRegistry;
     }
 
     @Override
@@ -27,19 +25,13 @@ public class BasicScriptServices implements ScriptServices {
     }
 
     @Override
-    public LayoutArea getLayout(String name) {
-        return layouts.get(name);
+    public WidgetArea getLayout(String name) {
+        return widgetAreaRegistry.lookup(name);
     }
 
-
-    public void addLayout(String name, JPanel panel) {
-        assert layouts.get(name) == null;
-        layouts.put(name, new BasicLayoutArea(panel, registry));
-    }
 
     private final PluginManager pluginManager;
-    private WidgetRegistry registry;
+    private WidgetAreaRegistry widgetAreaRegistry;
 
-    private Map<String, LayoutArea> layouts = new HashMap<String, LayoutArea>();
     private final List<String> pluginNames = new LinkedList<String>();
 }

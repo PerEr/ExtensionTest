@@ -1,13 +1,16 @@
 package app.view;
 
 import api.services.Logger;
+import api.widget.WidgetAreaRegistry;
 import api.widget.WidgetRegistry;
 import common.config.BasicScriptServices;
 import common.config.ScriptedConfig;
 import common.plugin.PluginManager;
 import common.plugin.PluginManagerNotification;
 import common.plugin.BasicServiceRegistry;
-import common.widget.SimpleWidgetRegistry;
+import common.widget.BasicWidgetArea;
+import common.widget.BasicWidgetAreaRegistry;
+import common.widget.BasiceWidgetRegistry;
 
 import javax.script.ScriptException;
 import javax.swing.*;
@@ -31,8 +34,6 @@ public class AppFrame extends JFrame {
             }
         });
 
-        BasicScriptServices scriptServices = new BasicScriptServices(pluginManager, widgetRegistry);
-
         final JPanel topPanel = buildHorizontalWidgetPanel();
         container.add(topPanel, BorderLayout.PAGE_START);
 
@@ -45,9 +46,11 @@ public class AppFrame extends JFrame {
         final JPanel bottomPanel = buildHorizontalWidgetPanel();
         container.add(bottomPanel, BorderLayout.PAGE_END);
 
-        scriptServices.addLayout("top", topPanel);
-        scriptServices.addLayout("right", rightPanel);
-        scriptServices.addLayout("bottom", bottomPanel);
+        widgetAreaRegistry.publishWidgetArea("top", new BasicWidgetArea(topPanel, widgetRegistry));
+        widgetAreaRegistry.publishWidgetArea("right", new BasicWidgetArea(rightPanel, widgetRegistry));
+        widgetAreaRegistry.publishWidgetArea("bottom", new BasicWidgetArea(bottomPanel, widgetRegistry));
+
+        final BasicScriptServices scriptServices = new BasicScriptServices(pluginManager, widgetAreaRegistry);
 
         ScriptedConfig.load("config.js", scriptServices);
 
@@ -106,11 +109,13 @@ public class AppFrame extends JFrame {
             }
         });
         registry.publishService(widgetRegistry);
+        registry.publishService(widgetAreaRegistry);
         registry.publishService(JFrame.class, this);
         return registry;
     }
 
-    private final WidgetRegistry widgetRegistry = new SimpleWidgetRegistry();
+    private final WidgetRegistry widgetRegistry = new BasiceWidgetRegistry();
+    private final WidgetAreaRegistry widgetAreaRegistry = new BasicWidgetAreaRegistry();
     private final BasicServiceRegistry registry = buildServiceRegistry();
 
     private final PluginManager pluginManager = new PluginManager(registry, new PluginManagerNotification() {

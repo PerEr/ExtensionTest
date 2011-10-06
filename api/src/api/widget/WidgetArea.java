@@ -1,15 +1,15 @@
-package common.config;
+package api.widget;
 
 /**
  * The interface exposed to javascript to add widgets to a layout
  */
-public interface LayoutArea {
+public interface WidgetArea {
     /**
      * Add a widget by name
      *
-     * @param widgetName The name of the widget
+     * @param widgetConf The name of the widget and optional paramdters
      */
-    void add(String widgetName);
+    void add(String widgetConf);
 
     /**
      * Add a widget by name with parameters

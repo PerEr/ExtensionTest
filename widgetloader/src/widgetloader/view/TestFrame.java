@@ -8,7 +8,7 @@ import common.plugin.PluginManager;
 import common.plugin.PluginManagerNotification;
 import common.plugin.ServiceRegistryNotification;
 import common.util.PropertyBuilder;
-import common.widget.SimpleWidgetRegistry;
+import common.widget.BasiceWidgetRegistry;
 import common.widget.WidgetRegistryNotification;
 
 import javax.swing.*;
@@ -19,7 +19,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.util.Properties;
 
 public class TestFrame extends JFrame {
 
@@ -49,7 +48,7 @@ public class TestFrame extends JFrame {
         final Timer timer = new Timer(500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if (inputField.hasFocus() == false) {
+                if (!inputField.hasFocus()) {
                     inputField.requestFocus();
                 }
             }
@@ -100,11 +99,13 @@ public class TestFrame extends JFrame {
 
         int ix = text.indexOf(",");
         if (ix > 0) {
-            widgetName = text.substring(0,ix);
-            parameters = text.substring(ix+1);
+            widgetName = text.substring(0, ix);
+            parameters = text.substring(ix + 1);
         }
+
         JComponent widget = widgetRegistry.instantiate(widgetName, PropertyBuilder.fromString(parameters));
         widget.setVisible(true);
+
         JFrame widgetFrame = new JFrame();
         widgetFrame.getContentPane().add(widget, BorderLayout.CENTER);
         widgetFrame.pack();
@@ -155,7 +156,7 @@ public class TestFrame extends JFrame {
     }
 
     private WidgetRegistry buildWidgetRegistry() {
-        SimpleWidgetRegistry registry = new SimpleWidgetRegistry();
+        BasiceWidgetRegistry registry = new BasiceWidgetRegistry();
         registry.addListener(new WidgetRegistryNotification() {
             @Override
             public void onWidgetPublished(String type) {

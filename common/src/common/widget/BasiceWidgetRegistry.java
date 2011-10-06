@@ -2,11 +2,13 @@ package common.widget;
 
 import api.widget.WidgetFactory;
 import api.widget.WidgetRegistry;
+import com.sun.tools.javac.tree.JCTree;
+import common.util.PropertyBuilder;
 
 import javax.swing.*;
 import java.util.*;
 
-public class SimpleWidgetRegistry implements WidgetRegistry {
+public class BasiceWidgetRegistry implements WidgetRegistry {
 
     public void registerWidgetFactory(String type, WidgetFactory factory) {
         assert type != null;
