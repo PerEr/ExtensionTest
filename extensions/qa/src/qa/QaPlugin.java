@@ -14,9 +14,9 @@ public class QaPlugin implements Plugin {
     }
 
     @Override
-    public void resolve(ServiceRegistry registry) {
-        final WidgetRegistry widgetRegistry = (WidgetRegistry) registry.lookupService(WidgetRegistry.class);
-        registerBuilder(widgetRegistry, AddWidgetWidget.NAME, new AddWidgetWidget.Factory());
+    public void resolve(ServiceRegistry serviceRegistry) {
+        final WidgetRegistry widgetRegistry = (WidgetRegistry) serviceRegistry.lookupService(WidgetRegistry.class);
+        registerBuilder(widgetRegistry, AddWidgetWidget.NAME, new AddWidgetWidget.Factory(serviceRegistry));
     }
 
     private void registerBuilder(final WidgetRegistry widgetRegistry, String name, final WidgetFactory factory) {

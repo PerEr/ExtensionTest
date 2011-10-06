@@ -150,6 +150,7 @@ public class TestFrame extends JFrame {
             }
         });
         registry.publishService(widgetRegistry);
+        registry.publishService(JFrame.class, this);
         return registry;
     }
 
