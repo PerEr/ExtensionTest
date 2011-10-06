@@ -107,6 +107,7 @@ public class TestFrame extends JFrame {
         widget.setVisible(true);
 
         JFrame widgetFrame = new JFrame();
+        widgetFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         widgetFrame.getContentPane().add(widget, BorderLayout.CENTER);
         widgetFrame.pack();
         widgetFrame.setVisible(true);
