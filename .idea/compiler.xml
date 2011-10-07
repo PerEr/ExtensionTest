@@ -16,6 +16,8 @@
       <entry name="?*.ftl" />
       <entry name="?*.txt" />
       <entry name="?*.js" />
+      <entry name="services" />
+      <entry name="*Plugin" />
     </wildcardResourcePatterns>
     <annotationProcessing enabled="false" useClasspath="true" />
   </component>

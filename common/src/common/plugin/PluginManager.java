@@ -3,14 +3,40 @@ package common.plugin;
 import api.plugin.Plugin;
 import api.plugin.ServiceRegistry;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ServiceLoader;
 
 public class PluginManager {
 
     public PluginManager(ServiceRegistry registry, PluginManagerNotification notification) {
         this.registry = registry;
         this.notification = notification;
+    }
+
+    public int autodetectPlugins() {
+
+        List<Plugin> detectedPlugins = new LinkedList<Plugin>();
+
+        // Detect and instantiate all "Plugin" classes.
+        ServiceLoader<Plugin> loader = ServiceLoader.load(Plugin.class);
+        Iterator<Plugin> ii = loader.iterator();
+        while (ii.hasNext()) {
+            Plugin plugin = ii.next();
+            detectedPlugins.add(plugin);
+        }
+
+
+        for (Plugin plugin : detectedPlugins) {
+            plugin.load(registry);
+        }
+
+        for (Plugin plugin : detectedPlugins) {
+            plugin.resolve(registry);
+        }
+
+        return detectedPlugins.size();
     }
 
     public void load(String[] classNames) {
