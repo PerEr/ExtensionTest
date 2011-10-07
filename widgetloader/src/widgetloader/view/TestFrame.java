@@ -1,6 +1,5 @@
 package widgetloader.view;
 
-import api.plugin.Plugin;
 import api.plugin.ServiceRegistry;
 import api.services.Logger;
 import api.widget.WidgetRegistry;
@@ -13,16 +12,15 @@ import common.widget.BasiceWidgetRegistry;
 import common.widget.WidgetRegistryNotification;
 
 import javax.swing.*;
-import javax.swing.Timer;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.util.*;
-import java.util.List;
 
 public class TestFrame extends JFrame {
 
@@ -41,51 +39,72 @@ public class TestFrame extends JFrame {
         statusLine.setPreferredSize(new Dimension(400, 20));
         container.add(statusLine, BorderLayout.PAGE_START);
 
-        serviceList.setPreferredSize(new Dimension(400, 400));
-        container.add(serviceList, BorderLayout.CENTER);
+        {
+            final JList serviceList = buildJList(serviceModel, "Discovered services");
+            serviceList.setPreferredSize(new Dimension(400, 400));
+            container.add(serviceList, BorderLayout.CENTER);
+        }
 
-        widgetList.setPreferredSize(new Dimension(400, 400));
-        container.add(widgetList, BorderLayout.LINE_END);
-
-        container.add(buildControlPanel(), BorderLayout.PAGE_END);
-
-        pluginManager.autodetectPlugins();
-
-        final Timer timer = new Timer(500, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                if (!inputField.hasFocus()) {
-                    inputField.requestFocus();
+        {
+            final JList widgetList = buildJList(widgetModel, "Discovered widgets types");
+            widgetList.setPreferredSize(new Dimension(400, 400));
+            widgetList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            container.add(widgetList, BorderLayout.LINE_END);
+            widgetList.addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent listSelectionEvent) {
+                    log(listSelectionEvent.toString());
+                    Object selectedValues[] = widgetList.getSelectedValues();
+                    if (selectedValues.length > 0) {
+                        String widgetName = (String) selectedValues[0];
+                        log(widgetName);
+                        inputField.setText(widgetName);
+                        inputField.requestFocus();
+                    }
                 }
+            });
+        }
+
+        final PluginManager pluginManager = new PluginManager(serviceRegistry, new PluginManagerNotification() {
+            public void onLoadFailure(String classname, Exception e) {
+                log("Failed to load " + classname);
+                inputField.requestFocus();
+            }
+
+            public void onLoaded(String className) {
+                log("Loaded " + className);
+                inputField.setText("");
+                inputField.requestFocus();
             }
         });
-        timer.start();
+
+        container.add(buildControlPanel(pluginManager), BorderLayout.PAGE_END);
 
         pack();
         setVisible(true);
     }
 
-    private JPanel buildControlPanel() {
+    private JPanel buildControlPanel(final PluginManager pluginManager) {
 
         final JPanel panel = new JPanel(new FlowLayout());
+
+        final JButton detectPlugins = new JButton("Discover plugins");
+        detectPlugins.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                pluginManager.autodetectPlugins();
+            }
+        });
+        panel.add(detectPlugins);
 
         inputField.setPreferredSize(new Dimension(400, 40));
         panel.add(inputField);
         inputField.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                pluginManager.load(new String[]{inputField.getText().trim()});
+                onWidgetSelected(inputField.getText().trim());
             }
         });
-
-        final JButton loadButton = new JButton("Load plugin");
-        loadButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                pluginManager.load(new String[]{inputField.getText().trim()});
-            }
-        });
-        panel.add(loadButton);
 
         final JButton instantiateButton = new JButton("Instantiate");
         instantiateButton.addActionListener(new ActionListener() {
@@ -191,27 +210,12 @@ public class TestFrame extends JFrame {
 
     // Widgets
     private final DefaultListModel widgetModel = new DefaultListModel();
-    private final JList widgetList = buildJList(widgetModel, "Widgets");
 
     private final WidgetRegistry widgetRegistry = buildWidgetRegistry();
 
     // Services
     private final DefaultListModel serviceModel = new DefaultListModel();
-    private final JList serviceList = buildJList(serviceModel, "Services");
     private final ServiceRegistry serviceRegistry = buildServiceRegistry();
-
-    private final PluginManager pluginManager = new PluginManager(serviceRegistry, new PluginManagerNotification() {
-        public void onLoadFailure(String classname, Exception e) {
-            log("Failed to load " + classname);
-            inputField.requestFocus();
-        }
-
-        public void onLoaded(String className) {
-            log("Loaded " + className);
-            inputField.setText("");
-            inputField.requestFocus();
-        }
-    });
 
     private final JTextField inputField = new JTextField("");
 
