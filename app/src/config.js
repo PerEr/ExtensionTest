@@ -1,12 +1,3 @@
-app.register('log.LogPlugin');
-app.register('shapes.SimpleShapesPlugin');
-app.register('clock.ClockPlugin');
-app.register('connection.monitor.ConnectionMonitorPlugin');
-app.register('connection.widget.ConnectionWidgetPlugin');
-app.register('qa.QaPlugin');
-
-app.loadAll();
-
 var top = app.getLayout("top");
 
 top.add('connection.status', 'host=127.0.0.1,port=12003');

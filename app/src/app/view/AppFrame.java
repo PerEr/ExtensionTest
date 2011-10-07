@@ -50,6 +50,9 @@ public class AppFrame extends JFrame {
         widgetAreaRegistry.publishWidgetArea("right", new BasicWidgetArea(rightPanel, widgetRegistry));
         widgetAreaRegistry.publishWidgetArea("bottom", new BasicWidgetArea(bottomPanel, widgetRegistry));
 
+        // Load all plugins that can be auto-detected.
+        pluginManager.autodetectPlugins();
+
         final BasicScriptServices scriptServices = new BasicScriptServices(pluginManager, widgetAreaRegistry);
 
         ScriptedConfig.load("config.js", scriptServices);

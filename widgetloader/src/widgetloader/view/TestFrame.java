@@ -1,5 +1,6 @@
 package widgetloader.view;
 
+import api.plugin.Plugin;
 import api.plugin.ServiceRegistry;
 import api.services.Logger;
 import api.widget.WidgetRegistry;
@@ -12,6 +13,7 @@ import common.widget.BasiceWidgetRegistry;
 import common.widget.WidgetRegistryNotification;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,6 +21,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.*;
+import java.util.List;
 
 public class TestFrame extends JFrame {
 
@@ -44,6 +48,8 @@ public class TestFrame extends JFrame {
         container.add(widgetList, BorderLayout.LINE_END);
 
         container.add(buildControlPanel(), BorderLayout.PAGE_END);
+
+        pluginManager.autodetectPlugins();
 
         final Timer timer = new Timer(500, new ActionListener() {
             @Override

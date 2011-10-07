@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: common.jar clock.jar logger.jar shapes.jar connection_monitor.jar
+Main-Class: widgetloader.Main
+
