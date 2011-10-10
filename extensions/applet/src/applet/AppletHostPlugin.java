@@ -10,7 +10,7 @@ import java.applet.Applet;
 import java.awt.*;
 import java.util.Properties;
 
-public class AppletPlugin implements Plugin {
+public class AppletHostPlugin implements Plugin {
 
     @Override
     public void load(final ServiceRegistry registry) {
@@ -24,20 +24,7 @@ public class AppletPlugin implements Plugin {
 
         final WidgetRegistry widgetRegistry = (WidgetRegistry) registry.lookupService(WidgetRegistry.class);
 
-        final WidgetFactory factory = new WidgetFactory() {
-            @Override
-            public JComponent instantiate(Properties prp) {
-                JPanel panel = new JPanel(new BorderLayout());
-                panel.setPreferredSize(new Dimension(500,500));
-                Applet applet = new TestApplet();
-
-                applet.init();
-                applet.start();
-                panel.add(applet, BorderLayout.CENTER);
-                //panel.setVisible(true);
-                return panel;
-            }
-        };
+        final WidgetFactory factory = new AppletHostFactory();
 
         widgetRegistry.registerWidgetFactory("applet", factory);
 

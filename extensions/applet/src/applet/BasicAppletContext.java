@@ -4,14 +4,15 @@ import java.applet.Applet;
 import java.applet.AppletContext;
 import java.applet.AudioClip;
 import java.awt.*;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
-class HostAppletContext implements AppletContext {
+class BasicAppletContext implements AppletContext {
 
     public AudioClip getAudioClip(URL url) {
         return Applet.newAudioClip(url);
@@ -29,7 +30,7 @@ class HostAppletContext implements AppletContext {
 
     public Enumeration getApplets() {
         assert false;
-        return null;
+        return NO_APPLETS;
     }
 
     public void showDocument(URL url) {
@@ -47,16 +48,32 @@ class HostAppletContext implements AppletContext {
         System.out.println(message);
     }
 
-    public void setStream(String key, InputStream stream) throws IOException {
-    }
-
     public InputStream getStream(String key) {
-        assert false;
-        return null;
+        return streamMap.get(key);
     }
 
     public Iterator<String> getStreamKeys() {
-        assert false;
-        return null;
+        return streamMap.keySet().iterator();
     }
+
+    public void setStream(String key, InputStream stream) {
+        if (stream == null) {
+            streamMap.remove(key);
+            return;
+        }
+        streamMap.put(key, stream);
+    }
+
+    private final Map<String, InputStream> streamMap = new HashMap<String, InputStream>();
+
+    private static final Enumeration<Applet> NO_APPLETS = new Enumeration<Applet>() {
+
+        public boolean hasMoreElements() {
+            return false;
+        }
+
+        public Applet nextElement() {
+            return null;
+        }
+    };
 }
