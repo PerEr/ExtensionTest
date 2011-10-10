@@ -19,10 +19,9 @@ right.add('square', 'color=55ccff');
 
 var bottom = app.getLayout("bottom");
 
+bottom.add('add_widget');
 bottom.add('clock');
 bottom.add('connection.status', 'host=127.0.0.1,port=12003');
-bottom.add('circle', 'color=ff0000');
-bottom.add('square', 'color=55ff33');
-bottom.add('add_widget');
+bottom.add('applet', 'classname=my.applet,codebase=http://abc.se');
 
 
