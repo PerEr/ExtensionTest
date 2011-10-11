@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/components/api/api.iml" filepath="$PROJECT_DIR$/components/api/api.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/components/applet/applet.iml" filepath="$PROJECT_DIR$/components/applet/applet.iml" />
       <module fileurl="file://$PROJECT_DIR$/components/clock/clock.iml" filepath="$PROJECT_DIR$/components/clock/clock.iml" />
       <module fileurl="file://$PROJECT_DIR$/components/common/common.iml" filepath="$PROJECT_DIR$/components/common/common.iml" />
@@ -11,6 +10,7 @@
       <module fileurl="file://$PROJECT_DIR$/components/logger/logger.iml" filepath="$PROJECT_DIR$/components/logger/logger.iml" />
       <module fileurl="file://$PROJECT_DIR$/components/qa/qa.iml" filepath="$PROJECT_DIR$/components/qa/qa.iml" />
       <module fileurl="file://$PROJECT_DIR$/components/shapes/shapes.iml" filepath="$PROJECT_DIR$/components/shapes/shapes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apps/testapp/testapp.iml" filepath="$PROJECT_DIR$/apps/testapp/testapp.iml" />
       <module fileurl="file://$PROJECT_DIR$/widgetloader/widgetloader.iml" filepath="$PROJECT_DIR$/widgetloader/widgetloader.iml" />
     </modules>
   </component>

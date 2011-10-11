@@ -1,6 +1,6 @@
-package app;
+package com.example.prototype.app;
 
-import app.view.AppFrame;
+import com.example.prototype.app.view.AppFrame;
 
 import javax.script.ScriptException;
 import javax.swing.*;

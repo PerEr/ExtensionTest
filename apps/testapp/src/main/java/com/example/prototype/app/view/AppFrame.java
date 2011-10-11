@@ -1,4 +1,4 @@
-package app.view;
+package com.example.prototype.app.view;
 
 import com.example.prototype.api.services.Logger;
 import com.example.prototype.api.widget.WidgetAreaRegistry;
