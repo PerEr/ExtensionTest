@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/components/api/api.iml" filepath="$PROJECT_DIR$/components/api/api.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/components/common/common.iml" filepath="$PROJECT_DIR$/components/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/extensions/applet/extension_applet.iml" filepath="$PROJECT_DIR$/extensions/applet/extension_applet.iml" />
       <module fileurl="file://$PROJECT_DIR$/extensions/clock/extension_clock.iml" filepath="$PROJECT_DIR$/extensions/clock/extension_clock.iml" />
       <module fileurl="file://$PROJECT_DIR$/extensions/connection/extension_connection.iml" filepath="$PROJECT_DIR$/extensions/connection/extension_connection.iml" />

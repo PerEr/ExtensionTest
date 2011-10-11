@@ -1,4 +1,4 @@
-package common.widget;
+package com.example.prototype.common.widget;
 
 public interface WidgetRegistryNotification {
 

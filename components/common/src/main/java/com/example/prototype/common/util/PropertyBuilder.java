@@ -1,4 +1,4 @@
-package common.util;
+package com.example.prototype.common.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

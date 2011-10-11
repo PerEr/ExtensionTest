@@ -1,6 +1,6 @@
-package common.config;
+package com.example.prototype.common.config;
 
-import common.util.ResourceLoader;
+import com.example.prototype.common.util.ResourceLoader;
 
 import javax.script.ScriptContext;
 import javax.script.ScriptEngine;

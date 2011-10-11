@@ -1,4 +1,4 @@
-package common.widget;
+package com.example.prototype.common.widget;
 
 import com.example.prototype.api.widget.WidgetFactory;
 import com.example.prototype.api.widget.WidgetRegistry;

@@ -1,4 +1,4 @@
-package common.plugin;
+package com.example.prototype.common.plugin;
 
 public interface PluginManagerNotification {
 

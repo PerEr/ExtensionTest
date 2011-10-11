@@ -1,8 +1,8 @@
-package common.config;
+package com.example.prototype.common.config;
 
 import com.example.prototype.api.widget.WidgetArea;
 import com.example.prototype.api.widget.WidgetAreaRegistry;
-import common.plugin.PluginManager;
+import com.example.prototype.common.plugin.PluginManager;
 
 import java.util.LinkedList;
 import java.util.List;

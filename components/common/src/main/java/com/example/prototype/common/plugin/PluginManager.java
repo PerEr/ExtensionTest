@@ -1,4 +1,4 @@
-package common.plugin;
+package com.example.prototype.common.plugin;
 
 import com.example.prototype.api.plugin.Plugin;
 import com.example.prototype.api.plugin.ServiceRegistry;

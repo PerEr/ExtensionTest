@@ -1,4 +1,4 @@
-package common.config;
+package com.example.prototype.common.config;
 
 import com.example.prototype.api.widget.WidgetArea;
 

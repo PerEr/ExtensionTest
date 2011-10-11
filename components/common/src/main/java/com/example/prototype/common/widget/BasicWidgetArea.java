@@ -1,8 +1,8 @@
-package common.widget;
+package com.example.prototype.common.widget;
 
 import com.example.prototype.api.widget.WidgetArea;
 import com.example.prototype.api.widget.WidgetRegistry;
-import common.util.PropertyBuilder;
+import com.example.prototype.common.util.PropertyBuilder;
 
 import javax.swing.*;
 
