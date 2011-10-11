@@ -1,4 +1,4 @@
-package applet;
+package com.example.prototype.applet;
 
 import com.example.prototype.api.widget.WidgetFactory;
 

@@ -1,4 +1,4 @@
-package applet;
+package com.example.prototype.applet;
 
 import java.applet.Applet;
 import java.applet.AppletContext;
