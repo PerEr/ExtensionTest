@@ -8,9 +8,9 @@
       <module fileurl="file://$PROJECT_DIR$/components/clock/clock.iml" filepath="$PROJECT_DIR$/components/clock/clock.iml" />
       <module fileurl="file://$PROJECT_DIR$/components/common/common.iml" filepath="$PROJECT_DIR$/components/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/components/connection/connection.iml" filepath="$PROJECT_DIR$/components/connection/connection.iml" />
-      <module fileurl="file://$PROJECT_DIR$/extensions/log/extension_log.iml" filepath="$PROJECT_DIR$/extensions/log/extension_log.iml" />
       <module fileurl="file://$PROJECT_DIR$/extensions/qa/extension_qa.iml" filepath="$PROJECT_DIR$/extensions/qa/extension_qa.iml" />
       <module fileurl="file://$PROJECT_DIR$/extensions/shapes/extension_shapes.iml" filepath="$PROJECT_DIR$/extensions/shapes/extension_shapes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/components/logger/logger.iml" filepath="$PROJECT_DIR$/components/logger/logger.iml" />
       <module fileurl="file://$PROJECT_DIR$/widgetloader/widgetloader.iml" filepath="$PROJECT_DIR$/widgetloader/widgetloader.iml" />
     </modules>
   </component>

@@ -7,7 +7,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="extension_log" />
     <orderEntry type="module" module-name="extension_shapes" />
     <orderEntry type="module" module-name="extension_qa" />
     <orderEntry type="module" module-name="api" />
@@ -15,6 +14,7 @@
     <orderEntry type="module" module-name="clock" />
     <orderEntry type="module" module-name="applet" />
     <orderEntry type="module" module-name="connection" />
+    <orderEntry type="module" module-name="logger" />
   </component>
 </module>
 

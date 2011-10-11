@@ -33,6 +33,7 @@
         <option value="$PROJECT_DIR$/components/clock/pom.xml" />
         <option value="$PROJECT_DIR$/components/applet/pom.xml" />
         <option value="$PROJECT_DIR$/components/connection/pom.xml" />
+        <option value="$PROJECT_DIR$/components/logger/pom.xml" />
       </list>
     </option>
   </component>

@@ -1,4 +1,4 @@
-package log;
+package com.example.prototype.log;
 
 import com.example.prototype.api.services.Logger;
 
