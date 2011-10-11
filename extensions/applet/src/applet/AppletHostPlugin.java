@@ -5,11 +5,6 @@ import api.plugin.ServiceRegistry;
 import api.widget.WidgetFactory;
 import api.widget.WidgetRegistry;
 
-import javax.swing.*;
-import java.applet.Applet;
-import java.awt.*;
-import java.util.Properties;
-
 public class AppletHostPlugin implements Plugin {
 
     @Override

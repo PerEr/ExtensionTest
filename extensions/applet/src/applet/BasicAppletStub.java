@@ -40,7 +40,6 @@ public class BasicAppletStub implements AppletStub {
 
     @Override
     public void appletResize(int i, int i1) {
-        assert false;
     }
 
     private AppletContext appletContext;

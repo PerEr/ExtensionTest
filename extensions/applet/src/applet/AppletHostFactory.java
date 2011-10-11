@@ -19,22 +19,25 @@ public class AppletHostFactory implements WidgetFactory {
         panel.setPreferredSize(appletConfig.dimension());
 
         try {
-            URL urls[] = { new URL(appletConfig.url()) };
+            URL urls[] = {new URL(appletConfig.url())};
             ClassLoader classLoader = new URLClassLoader(urls, this.getClass().getClassLoader());
             Class<Applet> appletClass = (Class<Applet>) classLoader.loadClass(appletConfig.code());
             Applet applet = appletClass.newInstance();
             AppletContext appletContext = new BasicAppletContext();
             AppletStub appletStub = new BasicAppletStub(appletContext, prp);
             applet.setStub(appletStub);
+            applet.setSize(appletConfig.dimension());
             applet.init();
             applet.start();
             panel.add(applet);
         } catch (Exception ex) {
-            JLabel label = new JLabel("Applet failed to load");
+            JTextArea label = new JTextArea("Applet\n" +
+                    appletConfig.url() + appletConfig.code() +
+                    "\nfailed to load");
+            label.setEditable(false);
             panel.add(label);
         }
 
-        panel.setPreferredSize(appletConfig.dimension());
         return panel;
     }
 }

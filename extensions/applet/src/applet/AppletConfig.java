@@ -31,7 +31,6 @@ public class AppletConfig {
         this.prp = prp;
         assert prp.get(CODE) != null;
         assert prp.get(CODEBASE) != null;
-        assert prp.get(ARCHIVE) != null;
     }
 
     public String code() {
@@ -39,7 +38,14 @@ public class AppletConfig {
     }
 
     public String url() {
-        return (String) prp.get(CODEBASE) + "/" + prp.get(ARCHIVE);
+        StringBuffer sb = new StringBuffer();
+        sb.append((String) prp.get(CODEBASE));
+        Object value = prp.get(ARCHIVE);
+        if (value != null) {
+            sb.append("/");
+            sb.append((String) value);
+        }
+        return sb.toString();
     }
 
     int valueToInt(Object value, int defaultValue) {
