@@ -1,8 +1,8 @@
-package connection.widget;
+package com.example.prototype.connection.widget;
 
 import com.example.prototype.api.widget.WidgetFactory;
-import connection.api.ConnectionListener;
-import connection.api.ConnectionMonitor;
+import com.example.prototype.connection.api.ConnectionListener;
+import com.example.prototype.connection.api.ConnectionMonitor;
 
 import javax.swing.*;
 import java.awt.*;

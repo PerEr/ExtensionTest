@@ -1,4 +1,4 @@
-package connection.monitor;
+package com.example.prototype.connection.monitor;
 
 import com.example.prototype.api.plugin.Plugin;
 import com.example.prototype.api.plugin.ServiceRegistry;

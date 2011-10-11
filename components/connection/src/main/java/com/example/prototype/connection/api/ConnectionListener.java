@@ -1,4 +1,4 @@
-package connection.api;
+package com.example.prototype.connection.api;
 
 public interface ConnectionListener {
 

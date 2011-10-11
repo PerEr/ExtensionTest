@@ -1,7 +1,7 @@
-package connection.monitor;
+package com.example.prototype.connection.monitor;
 
-import connection.api.ConnectionListener;
-import connection.api.ConnectionMonitor;
+import com.example.prototype.connection.api.ConnectionListener;
+import com.example.prototype.connection.api.ConnectionMonitor;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,10 +1,10 @@
-package connection.widget;
+package com.example.prototype.connection.widget;
 
 import com.example.prototype.api.plugin.Plugin;
 import com.example.prototype.api.plugin.ServiceRegistry;
 import com.example.prototype.api.widget.WidgetFactory;
 import com.example.prototype.api.widget.WidgetRegistry;
-import connection.api.ConnectionMonitor;
+import com.example.prototype.connection.api.ConnectionMonitor;
 
 public class ConnectionWidgetPlugin implements Plugin {
     @Override
