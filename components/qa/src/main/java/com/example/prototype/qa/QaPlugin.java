@@ -1,4 +1,4 @@
-package qa;
+package com.example.prototype.qa;
 
 import com.example.prototype.api.plugin.Plugin;
 import com.example.prototype.api.plugin.ServiceRegistry;

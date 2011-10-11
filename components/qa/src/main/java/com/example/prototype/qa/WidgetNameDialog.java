@@ -1,4 +1,4 @@
-package qa;
+package com.example.prototype.qa;
 
 import javax.swing.*;
 import java.awt.*;
