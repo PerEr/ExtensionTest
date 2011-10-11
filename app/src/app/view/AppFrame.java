@@ -1,8 +1,8 @@
 package app.view;
 
-import api.services.Logger;
-import api.widget.WidgetAreaRegistry;
-import api.widget.WidgetRegistry;
+import com.example.prototype.api.services.Logger;
+import com.example.prototype.api.widget.WidgetAreaRegistry;
+import com.example.prototype.api.widget.WidgetRegistry;
 import common.config.BasicScriptServices;
 import common.config.ScriptedConfig;
 import common.plugin.PluginManager;

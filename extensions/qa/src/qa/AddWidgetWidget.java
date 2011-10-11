@@ -1,9 +1,9 @@
 package qa;
 
-import api.plugin.ServiceRegistry;
-import api.widget.WidgetArea;
-import api.widget.WidgetAreaRegistry;
-import api.widget.WidgetFactory;
+import com.example.prototype.api.plugin.ServiceRegistry;
+import com.example.prototype.api.widget.WidgetArea;
+import com.example.prototype.api.widget.WidgetAreaRegistry;
+import com.example.prototype.api.widget.WidgetFactory;
 
 import javax.swing.*;
 import java.awt.*;

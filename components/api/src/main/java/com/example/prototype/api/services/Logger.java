@@ -1,4 +1,4 @@
-package api.services;
+package com.example.prototype.api.services;
 
 public interface Logger {
 

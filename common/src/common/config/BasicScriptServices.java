@@ -1,7 +1,7 @@
 package common.config;
 
-import api.widget.WidgetArea;
-import api.widget.WidgetAreaRegistry;
+import com.example.prototype.api.widget.WidgetArea;
+import com.example.prototype.api.widget.WidgetAreaRegistry;
 import common.plugin.PluginManager;
 
 import java.util.LinkedList;

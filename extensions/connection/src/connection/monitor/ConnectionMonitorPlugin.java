@@ -1,8 +1,7 @@
 package connection.monitor;
 
-import api.plugin.Plugin;
-import api.plugin.ServiceRegistry;
-import connection.api.ConnectionMonitor;
+import com.example.prototype.api.plugin.Plugin;
+import com.example.prototype.api.plugin.ServiceRegistry;
 
 public class ConnectionMonitorPlugin implements Plugin {
 

@@ -1,6 +1,6 @@
 package common.config;
 
-import api.widget.WidgetArea;
+import com.example.prototype.api.widget.WidgetArea;
 
 /**
  * The callback interface exposed to the javascript configuration file.

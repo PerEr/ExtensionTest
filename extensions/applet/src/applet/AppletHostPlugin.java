@@ -1,9 +1,9 @@
 package applet;
 
-import api.plugin.Plugin;
-import api.plugin.ServiceRegistry;
-import api.widget.WidgetFactory;
-import api.widget.WidgetRegistry;
+import com.example.prototype.api.plugin.Plugin;
+import com.example.prototype.api.plugin.ServiceRegistry;
+import com.example.prototype.api.widget.WidgetFactory;
+import com.example.prototype.api.widget.WidgetRegistry;
 
 public class AppletHostPlugin implements Plugin {
 

@@ -1,4 +1,4 @@
-package api.widget;
+package com.example.prototype.api.widget;
 
 /**
  * The interface exposed to javascript to add widgets to a layout

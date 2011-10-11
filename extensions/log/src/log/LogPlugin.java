@@ -1,8 +1,8 @@
 package log;
 
-import api.plugin.Plugin;
-import api.plugin.ServiceRegistry;
-import api.services.Logger;
+import com.example.prototype.api.plugin.Plugin;
+import com.example.prototype.api.plugin.ServiceRegistry;
+import com.example.prototype.api.services.Logger;
 
 public class LogPlugin implements Plugin {
 

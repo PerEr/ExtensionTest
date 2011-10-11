@@ -1,8 +1,8 @@
 package widgetloader.view;
 
-import api.plugin.ServiceRegistry;
-import api.services.Logger;
-import api.widget.WidgetRegistry;
+import com.example.prototype.api.plugin.ServiceRegistry;
+import com.example.prototype.api.services.Logger;
+import com.example.prototype.api.widget.WidgetRegistry;
 import common.plugin.BasicServiceRegistry;
 import common.plugin.PluginManager;
 import common.plugin.PluginManagerNotification;

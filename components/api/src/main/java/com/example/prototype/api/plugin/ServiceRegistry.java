@@ -1,4 +1,4 @@
-package api.plugin;
+package com.example.prototype.api.plugin;
 
 /**
  * A registry for services within the application.

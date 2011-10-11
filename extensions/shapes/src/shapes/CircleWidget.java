@@ -1,7 +1,7 @@
 package shapes;
 
 
-import api.widget.WidgetFactory;
+import com.example.prototype.api.widget.WidgetFactory;
 
 import javax.swing.*;
 import java.awt.*;

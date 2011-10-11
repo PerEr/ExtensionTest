@@ -1,7 +1,7 @@
 package common.widget;
 
-import api.widget.WidgetArea;
-import api.widget.WidgetAreaRegistry;
+import com.example.prototype.api.widget.WidgetArea;
+import com.example.prototype.api.widget.WidgetAreaRegistry;
 
 import java.util.HashMap;
 import java.util.Map;

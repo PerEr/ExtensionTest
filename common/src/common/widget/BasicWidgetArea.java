@@ -1,11 +1,10 @@
 package common.widget;
 
-import api.widget.WidgetArea;
-import api.widget.WidgetRegistry;
+import com.example.prototype.api.widget.WidgetArea;
+import com.example.prototype.api.widget.WidgetRegistry;
 import common.util.PropertyBuilder;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class BasicWidgetArea implements WidgetArea {
 

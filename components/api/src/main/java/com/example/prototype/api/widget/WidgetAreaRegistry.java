@@ -1,4 +1,4 @@
-package api.widget;
+package com.example.prototype.api.widget;
 
 public interface WidgetAreaRegistry {
 

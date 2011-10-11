@@ -1,9 +1,7 @@
 package common.widget;
 
-import api.widget.WidgetFactory;
-import api.widget.WidgetRegistry;
-import com.sun.tools.javac.tree.JCTree;
-import common.util.PropertyBuilder;
+import com.example.prototype.api.widget.WidgetFactory;
+import com.example.prototype.api.widget.WidgetRegistry;
 
 import javax.swing.*;
 import java.util.*;

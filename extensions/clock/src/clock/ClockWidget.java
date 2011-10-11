@@ -5,7 +5,7 @@ package clock;
 // Note   : Uses a BufferedImage for clock face so isn't drawn each time.
 // Author : Fred Swartz, 1999-2007, Placed in public domain.
 
-import api.widget.WidgetFactory;
+import com.example.prototype.api.widget.WidgetFactory;
 
 import java.util.*;
 import java.awt.*;

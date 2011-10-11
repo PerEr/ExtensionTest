@@ -1,9 +1,8 @@
 package connection.widget;
 
-import api.widget.WidgetFactory;
+import com.example.prototype.api.widget.WidgetFactory;
 import connection.api.ConnectionListener;
 import connection.api.ConnectionMonitor;
-import sun.rmi.transport.Connection;
 
 import javax.swing.*;
 import java.awt.*;

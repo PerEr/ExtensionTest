@@ -2,7 +2,7 @@ package common.plugin;
 
 import java.util.*;
 
-public class BasicServiceRegistry implements api.plugin.ServiceRegistry {
+public class BasicServiceRegistry implements com.example.prototype.api.plugin.ServiceRegistry {
 
     public void publishService(Class cl, Object service) {
         assert cl.isInstance(service);

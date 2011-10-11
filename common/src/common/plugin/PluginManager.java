@@ -1,7 +1,7 @@
 package common.plugin;
 
-import api.plugin.Plugin;
-import api.plugin.ServiceRegistry;
+import com.example.prototype.api.plugin.Plugin;
+import com.example.prototype.api.plugin.ServiceRegistry;
 
 import java.util.Iterator;
 import java.util.LinkedList;

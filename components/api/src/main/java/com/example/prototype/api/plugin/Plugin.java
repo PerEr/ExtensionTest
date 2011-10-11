@@ -1,4 +1,4 @@
-package api.plugin;
+package com.example.prototype.api.plugin;
 
 /**
  * The interface all plugins must realize. Publish services provided by the plugin in the load methods, resolve
