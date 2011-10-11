@@ -1,4 +1,4 @@
-package shapes;
+package com.example.prototype.shapes;
 
 
 import com.example.prototype.api.plugin.Plugin;

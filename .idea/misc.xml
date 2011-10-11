@@ -35,6 +35,7 @@
         <option value="$PROJECT_DIR$/components/connection/pom.xml" />
         <option value="$PROJECT_DIR$/components/logger/pom.xml" />
         <option value="$PROJECT_DIR$/components/qa/pom.xml" />
+        <option value="$PROJECT_DIR$/components/shapes/pom.xml" />
       </list>
     </option>
   </component>
