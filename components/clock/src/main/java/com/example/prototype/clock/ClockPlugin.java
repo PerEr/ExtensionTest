@@ -1,4 +1,4 @@
-package clock;
+package com.example.prototype.clock;
 
 import com.example.prototype.api.plugin.Plugin;
 import com.example.prototype.api.plugin.ServiceRegistry;

@@ -1,8 +1,8 @@
-package clock;
+package com.example.prototype.clock;
 
 // File   : GUI-lowlevel/animation/analogclock/ClockWidget.java
-// Purpose: An analog clock component -- Uses Timer and Calendar.
-// Note   : Uses a BufferedImage for clock face so isn't drawn each time.
+// Purpose: An analog com.example.prototype.clock component -- Uses Timer and Calendar.
+// Note   : Uses a BufferedImage for com.example.prototype.clock face so isn't drawn each time.
 // Author : Fred Swartz, 1999-2007, Placed in public domain.
 
 import com.example.prototype.api.widget.WidgetFactory;
@@ -21,10 +21,10 @@ class ClockWidget extends JComponent {
 
     private final Calendar calendar = Calendar.getInstance();  // Current time.
 
-    private int diameter;                 // Height and width of clock face
-    private int centerX;                  // x coord of middle of clock
-    private int centerY;                  // y coord of middle of clock
-    private BufferedImage clockImage;     // Saved image of the clock face.
+    private int diameter;                 // Height and width of com.example.prototype.clock face
+    private int centerX;                  // x coord of middle of com.example.prototype.clock
+    private int centerY;                  // y coord of middle of com.example.prototype.clock
+    private BufferedImage clockImage;     // Saved image of the com.example.prototype.clock face.
 
     static final String NAME = "clock";
     private final Color color;
@@ -62,7 +62,7 @@ class ClockWidget extends JComponent {
         centerX = width / 2;
         centerY = height / 2;
 
-        //... Create the clock face background image if this is the first time,
+        //... Create the com.example.prototype.clock face background image if this is the first time,
         //    or if the size of the panel has changed
         if (clockImage == null
                 || clockImage.getWidth() != width
@@ -76,10 +76,10 @@ class ClockWidget extends JComponent {
             drawClockFace(g2a);
         }
 
-        //... Draw the clock face from the precomputed image
+        //... Draw the com.example.prototype.clock face from the precomputed image
         g2.drawImage(clockImage, null, 0, 0);
 
-        //... Draw the clock hands dynamically each time.
+        //... Draw the com.example.prototype.clock hands dynamically each time.
         drawClockHands(g2);
     }
 
@@ -106,7 +106,7 @@ class ClockWidget extends JComponent {
     }
 
     private void drawClockFace(Graphics2D g2) {
-        // ... Draw the clock face.  Probably into a buffer.
+        // ... Draw the com.example.prototype.clock face.  Probably into a buffer.
         g2.setColor(color);
         g2.fillOval(centerX-diameter/2, centerY-diameter/2, diameter, diameter);
         g2.setColor(Color.BLUE);
@@ -126,7 +126,7 @@ class ClockWidget extends JComponent {
         }
     }
 
-    // This draw lines along a radius from the clock face center.
+    // This draw lines along a radius from the com.example.prototype.clock face center.
     // By changing the parameters, it can be used to draw tick marks,
     // as well as the hands.
     private void drawRadius(Graphics2D g2, double percent,

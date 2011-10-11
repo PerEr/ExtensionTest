@@ -30,6 +30,7 @@
         <option value="$PROJECT_DIR$/components/common/pom.xml" />
         <option value="$PROJECT_DIR$/components/api/pom.xml" />
         <option value="$PROJECT_DIR$/components/common/pom.xml" />
+        <option value="$PROJECT_DIR$/components/clock/pom.xml" />
       </list>
     </option>
   </component>
