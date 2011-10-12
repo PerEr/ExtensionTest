@@ -11,12 +11,12 @@ import java.util.Properties;
 
 class CircleWidget extends JComponent {
 
-    private Color color;
     private int colorValue;
     private int deltaColorValue;
+    private final ShapeConfig shapeConfig;
 
-    CircleWidget(Color color) {
-        this.color = color;
+    CircleWidget(ShapeConfig shapeConfig) {
+        this.shapeConfig = shapeConfig;
         setOpaque(false);
         colorValue = 0;
         deltaColorValue = 8;
@@ -26,18 +26,18 @@ class CircleWidget extends JComponent {
     @Override
     public void paint(Graphics graphics) {
         super.paint(graphics);
-        Dimension d = getSize();
-        graphics.setColor(color);
+        final Dimension d = getSize();
+        graphics.setColor(shapeConfig.color());
         graphics.fillOval(0, 0, d.width, d.height);
-        Color borderColor = new Color(colorValue, colorValue, colorValue);
+        final Color borderColor = new Color(colorValue, colorValue, colorValue);
         graphics.setColor(borderColor);
-        graphics.drawOval(0, 0, d.width, d.height);
-        graphics.drawOval(1, 1, d.width-2, d.height-2);
+        graphics.drawOval(0, 0, d.width-1, d.height-1);
+        graphics.drawOval(1, 1, d.width-3, d.height-3);
     }
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(100,100);
+        return shapeConfig.dimension();
     }
 
     private void onTimer() {
@@ -50,8 +50,8 @@ class CircleWidget extends JComponent {
 
         @Override
         public JComponent instantiate(Properties prp) {
-            int colorAsInt = Integer.parseInt(prp.getProperty("color", "ff0000"), 16);
-            return new CircleWidget(new Color(colorAsInt));
+            final ShapeConfig shapeConfig = new ShapeConfig(prp);
+            return new CircleWidget(shapeConfig);
         }
     }
 

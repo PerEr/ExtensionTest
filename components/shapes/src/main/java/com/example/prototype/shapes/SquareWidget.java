@@ -9,33 +9,33 @@ import java.util.Properties;
 
 class SquareWidget extends JComponent {
 
-    private Color color;
+    private ShapeConfig shapeConfig;
 
-    SquareWidget(Color color) {
-        this.color = color;
+    public SquareWidget(ShapeConfig shapeConfig) {
+        this.shapeConfig = shapeConfig;
         setOpaque(false);
     }
 
     @Override
     public void paint(Graphics graphics) {
         super.paint(graphics);
-        Dimension d = getSize();
-        graphics.setColor(color);
-        graphics.fillRect(0, 0, d.width, d.height);
+        final Dimension d = getSize();
+        graphics.setColor(shapeConfig.color());
+        graphics.fillRect(0, 0, d.width-1, d.height-1);
         graphics.setColor(Color.BLACK);
-        graphics.drawRect(0, 0, d.width, d.height);
+        graphics.drawRect(0, 0, d.width-1, d.height-1);
     }
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(100,100);
+        return shapeConfig.dimension();
     }
 
     static class Factory implements WidgetFactory {
         @Override
         public JComponent instantiate(Properties prp) {
-            int colorAsInt = Integer.parseInt(prp.getProperty("color", "ff0000"), 16);
-            return new SquareWidget(new Color(colorAsInt));
+            final ShapeConfig shapeConfig = new ShapeConfig(prp);
+            return new SquareWidget(shapeConfig);
         }
     }
 
