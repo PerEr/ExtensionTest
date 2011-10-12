@@ -23,6 +23,24 @@
     <option name="LOCALE" />
     <option name="OPEN_IN_BROWSER" value="true" />
   </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/components/api/pom.xml" />
+        <option value="$PROJECT_DIR$/components/common/pom.xml" />
+        <option value="$PROJECT_DIR$/components/api/pom.xml" />
+        <option value="$PROJECT_DIR$/components/common/pom.xml" />
+        <option value="$PROJECT_DIR$/components/clock/pom.xml" />
+        <option value="$PROJECT_DIR$/components/applet/pom.xml" />
+        <option value="$PROJECT_DIR$/components/connection/pom.xml" />
+        <option value="$PROJECT_DIR$/components/logger/pom.xml" />
+        <option value="$PROJECT_DIR$/components/qa/pom.xml" />
+        <option value="$PROJECT_DIR$/components/shapes/pom.xml" />
+        <option value="$PROJECT_DIR$/apps/testapp/pom.xml" />
+        <option value="$PROJECT_DIR$/apps/widgetloader/pom.xml" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectResources">
     <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>

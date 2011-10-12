@@ -3,4 +3,5 @@ out/
 workspace.xml
 originals
 artifacts
+target/
 
