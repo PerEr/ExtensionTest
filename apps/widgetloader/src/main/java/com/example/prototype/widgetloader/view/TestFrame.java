@@ -1,4 +1,4 @@
-package widgetloader.view;
+package com.example.prototype.widgetloader.view;
 
 import com.example.prototype.api.plugin.ServiceRegistry;
 import com.example.prototype.api.services.Logger;

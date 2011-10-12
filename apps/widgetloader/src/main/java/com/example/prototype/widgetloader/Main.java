@@ -1,6 +1,6 @@
-package widgetloader;
+package com.example.prototype.widgetloader;
 
-import widgetloader.view.TestFrame;
+import com.example.prototype.widgetloader.view.TestFrame;
 
 import javax.swing.*;
 import java.io.IOException;

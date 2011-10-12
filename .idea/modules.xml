@@ -11,7 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/components/qa/qa.iml" filepath="$PROJECT_DIR$/components/qa/qa.iml" />
       <module fileurl="file://$PROJECT_DIR$/components/shapes/shapes.iml" filepath="$PROJECT_DIR$/components/shapes/shapes.iml" />
       <module fileurl="file://$PROJECT_DIR$/apps/testapp/testapp.iml" filepath="$PROJECT_DIR$/apps/testapp/testapp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/widgetloader/widgetloader.iml" filepath="$PROJECT_DIR$/widgetloader/widgetloader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apps/widgetloader/widgetloader.iml" filepath="$PROJECT_DIR$/apps/widgetloader/widgetloader.iml" />
     </modules>
   </component>
 </project>
