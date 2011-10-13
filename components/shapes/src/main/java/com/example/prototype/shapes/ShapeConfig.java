@@ -19,4 +19,16 @@ class ShapeConfig {
     Color color() {
         return new Color(Integer.parseInt(prp.getProperty("color", "ff0000"), 16));
     }
+
+    String type() {
+        return prp.getProperty("type", CircleWidget.NAME);
+    }
+
+    int rows() {
+        return Integer.parseInt(prp.getProperty("rows", "1"));
+    }
+
+    int columns() {
+        return Integer.parseInt(prp.getProperty("columns", "1"));
+    }
 }

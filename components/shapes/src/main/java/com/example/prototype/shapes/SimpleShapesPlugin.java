@@ -19,6 +19,7 @@ public class SimpleShapesPlugin implements Plugin {
         final WidgetRegistry widgetRegistry = (WidgetRegistry) registry.lookupService(WidgetRegistry.class);
         registerBuilder(widgetRegistry, CircleWidget.NAME, new CircleWidget.Factory());
         registerBuilder(widgetRegistry, SquareWidget.NAME, new SquareWidget.Factory());
+        registerBuilder(widgetRegistry, GridWidget.NAME, new GridWidget.Factory(widgetRegistry));
     }
 
     private void registerBuilder(final WidgetRegistry widgetRegistry, String name, final WidgetFactory factory) {
