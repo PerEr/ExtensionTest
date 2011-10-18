@@ -10,12 +10,7 @@ top.add('connection.status');
 top.add('square', 'color=55ff33');
 
 var right = app.getLayout("right");
-
-right.add('clock');
-right.add('circle', 'color=ff0000');
-right.add('square', 'color=bbff33');
-right.add('circle', 'color=00ff00');
-right.add('square', 'color=55ccff');
+right.add('log');
 
 var bottom = app.getLayout("bottom");
 
