@@ -38,7 +38,7 @@ public class AppletConfig {
     }
 
     public String url() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append((String) prp.get(CODEBASE));
         Object value = prp.get(ARCHIVE);
         if (value != null) {
@@ -54,6 +54,7 @@ public class AppletConfig {
             try {
                 reply = Integer.valueOf((String) value);
             } catch (NumberFormatException ex) {
+                reply = defaultValue;
             }
         }
         return reply;

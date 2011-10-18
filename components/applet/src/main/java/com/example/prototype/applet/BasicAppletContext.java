@@ -28,7 +28,7 @@ class BasicAppletContext implements AppletContext {
         return null;
     }
 
-    public Enumeration getApplets() {
+    public Enumeration<Applet> getApplets() {
         assert false;
         return NO_APPLETS;
     }

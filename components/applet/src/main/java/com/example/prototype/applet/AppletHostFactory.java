@@ -21,7 +21,7 @@ public class AppletHostFactory implements WidgetFactory {
         panel.setPreferredSize(appletConfig.dimension());
         final StringBuffer sb = new StringBuffer();
 
-        ClassLoader classLoader = null;
+        ClassLoader classLoader;
         try {
             classLoader = (ClassLoader) AccessController.doPrivileged(new PrivilegedAction<Object>() {
                 @Override
@@ -36,7 +36,7 @@ public class AppletHostFactory implements WidgetFactory {
                 }
             });
             Class<Applet> appletClass = (Class<Applet>) classLoader.loadClass(appletConfig.code());
-            Applet applet = (Applet) appletClass.newInstance();
+            Applet applet = appletClass.newInstance();
             AppletContext appletContext = new BasicAppletContext();
             AppletStub appletStub = new BasicAppletStub(appletContext, prp);
             applet.setStub(appletStub);
