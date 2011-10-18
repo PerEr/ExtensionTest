@@ -7,16 +7,14 @@ import java.io.InputStreamReader;
 
 public class ResourceLoader {
 
-
     public static String loadResource(String resourceName) throws IOException {
-        ClassLoader ld = ClassLoader.getSystemClassLoader();
-        InputStream is = ld.getResourceAsStream(resourceName);
-         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-         StringBuffer sb = new StringBuffer();
-         while (reader.ready()) {
-             String line = reader.readLine();
-             sb.append(line);
-         }
+        InputStream is = ResourceLoader.class.getResourceAsStream(resourceName);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        StringBuffer sb = new StringBuffer();
+        while (reader.ready()) {
+            String line = reader.readLine();
+            sb.append(line);
+        }
         return sb.toString();
-     }
+    }
 }

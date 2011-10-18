@@ -42,6 +42,7 @@ public class BasicServiceRegistry implements ServiceRegistry {
         for (ServiceRegistryNotification listener : listeners) {
             listener.onRegistryDispose();
         }
+        listeners.clear();
         servicesMap.clear();
     }
 
@@ -50,9 +51,8 @@ public class BasicServiceRegistry implements ServiceRegistry {
     }
 
     public void removeListener(ServiceRegistryNotification listener) {
-        int sz = listeners.size();
-        listeners.remove(listener);
-        assert listeners.size() + 1 == sz;
+        boolean removedListener = listeners.remove(listener);
+        assert removedListener;
     }
 
     private void addService(Class serviceType, Object service) {

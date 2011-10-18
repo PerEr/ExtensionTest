@@ -6,7 +6,7 @@ import com.example.prototype.api.widget.WidgetRegistry;
 import javax.swing.*;
 import java.util.*;
 
-public class BasiceWidgetRegistry implements WidgetRegistry {
+public class BasicWidgetRegistry implements WidgetRegistry {
 
     public void registerWidgetFactory(String type, WidgetFactory factory) {
         assert type != null;
@@ -58,11 +58,19 @@ public class BasiceWidgetRegistry implements WidgetRegistry {
     }
 
     public void removeListener(WidgetRegistryNotification listener) {
-        int sz = listeners.size();
-        listeners.remove(listener);
-        assert listeners.size() + 1 == sz;
+        boolean removedListener = listeners.remove(listener);
+        assert removedListener;
+    }
+
+    public void dispose() {
+        for (WidgetRegistryNotification listener : listeners) {
+            listener.onRegistryDispose();
+        }
+        listeners.clear();
+        builders.clear();
     }
 
     private final Map<String, WidgetFactory> builders = new HashMap<String, WidgetFactory>();
     private final List<WidgetRegistryNotification> listeners = new LinkedList<WidgetRegistryNotification>();
+
 }

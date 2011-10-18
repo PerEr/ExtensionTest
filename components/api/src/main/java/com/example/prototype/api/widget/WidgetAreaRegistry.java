@@ -6,4 +6,5 @@ public interface WidgetAreaRegistry {
 
     void publishWidgetArea(String name, WidgetArea widgetArea);
     void unpublishWidgetArea(String name, WidgetArea widgetArea);
+
 }

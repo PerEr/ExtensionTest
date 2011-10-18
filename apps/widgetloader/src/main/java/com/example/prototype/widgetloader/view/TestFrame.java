@@ -8,7 +8,7 @@ import com.example.prototype.common.plugin.PluginManager;
 import com.example.prototype.common.plugin.PluginManagerNotification;
 import com.example.prototype.common.plugin.ServiceRegistryNotification;
 import com.example.prototype.common.util.PropertyBuilder;
-import com.example.prototype.common.widget.BasiceWidgetRegistry;
+import com.example.prototype.common.widget.BasicWidgetRegistry;
 import com.example.prototype.common.widget.WidgetRegistryNotification;
 
 import javax.swing.*;
@@ -182,7 +182,7 @@ public class TestFrame extends JFrame {
     }
 
     private WidgetRegistry buildWidgetRegistry() {
-        BasiceWidgetRegistry registry = new BasiceWidgetRegistry();
+        BasicWidgetRegistry registry = new BasicWidgetRegistry();
         registry.addListener(new WidgetRegistryNotification() {
             @Override
             public void onWidgetPublished(String type) {

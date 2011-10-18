@@ -10,7 +10,7 @@ import com.example.prototype.common.plugin.PluginManagerNotification;
 import com.example.prototype.common.plugin.BasicServiceRegistry;
 import com.example.prototype.common.widget.BasicWidgetArea;
 import com.example.prototype.common.widget.BasicWidgetAreaRegistry;
-import com.example.prototype.common.widget.BasiceWidgetRegistry;
+import com.example.prototype.common.widget.BasicWidgetRegistry;
 
 import javax.script.ScriptException;
 import javax.swing.*;
@@ -46,16 +46,16 @@ public class AppFrame extends JFrame {
         final JPanel bottomPanel = buildHorizontalWidgetPanel();
         container.add(bottomPanel, BorderLayout.PAGE_END);
 
-        widgetAreaRegistry.publishWidgetArea("top", new BasicWidgetArea(topPanel, widgetRegistry));
-        widgetAreaRegistry.publishWidgetArea("right", new BasicWidgetArea(rightPanel, widgetRegistry));
-        widgetAreaRegistry.publishWidgetArea("bottom", new BasicWidgetArea(bottomPanel, widgetRegistry));
+        widgetAreaRegistry.publishWidgetArea("top", new BasicWidgetArea(topPanel, serviceRegistry, widgetRegistry));
+        widgetAreaRegistry.publishWidgetArea("right", new BasicWidgetArea(rightPanel, serviceRegistry, widgetRegistry));
+        widgetAreaRegistry.publishWidgetArea("bottom", new BasicWidgetArea(bottomPanel, serviceRegistry, widgetRegistry));
 
         // Load all plugins that can be auto-detected.
         pluginManager.autodetectPlugins();
 
-        final BasicScriptServices scriptServices = new BasicScriptServices(pluginManager, widgetAreaRegistry);
+        final BasicScriptServices scriptServices = new BasicScriptServices(serviceRegistry, widgetAreaRegistry);
 
-        ScriptedConfig.load("config.js", scriptServices);
+        ScriptedConfig.load("/config.js", scriptServices);
 
         setSize(new Dimension(1024, 920));
         setVisible(true);
@@ -88,11 +88,11 @@ public class AppFrame extends JFrame {
         log("Plugins unloading...");
         pluginManager.dispose();
         log("Plugins unloaded");
-        registry.dispose();
+        serviceRegistry.dispose();
     }
 
     private void log(String message) {
-        final Logger logger = (Logger) registry.lookupService(Logger.class);
+        final Logger logger = (Logger) serviceRegistry.lookupService(Logger.class);
         logger.logInfo(message);
     }
 
@@ -117,11 +117,11 @@ public class AppFrame extends JFrame {
         return registry;
     }
 
-    private final WidgetRegistry widgetRegistry = new BasiceWidgetRegistry();
+    private final WidgetRegistry widgetRegistry = new BasicWidgetRegistry();
     private final WidgetAreaRegistry widgetAreaRegistry = new BasicWidgetAreaRegistry();
-    private final BasicServiceRegistry registry = buildServiceRegistry();
+    private final BasicServiceRegistry serviceRegistry = buildServiceRegistry();
 
-    private final PluginManager pluginManager = new PluginManager(registry, new PluginManagerNotification() {
+    private final PluginManager pluginManager = new PluginManager(serviceRegistry, new PluginManagerNotification() {
         public void onLoadFailure(String classname, Exception e) {
             log("Failed to load " + classname);
         }

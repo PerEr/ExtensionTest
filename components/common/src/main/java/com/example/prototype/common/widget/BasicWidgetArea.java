@@ -1,5 +1,7 @@
 package com.example.prototype.common.widget;
 
+import com.example.prototype.api.plugin.ServiceRegistry;
+import com.example.prototype.api.services.Logger;
 import com.example.prototype.api.widget.WidgetArea;
 import com.example.prototype.api.widget.WidgetRegistry;
 import com.example.prototype.common.util.PropertyBuilder;
@@ -8,10 +10,9 @@ import javax.swing.*;
 
 public class BasicWidgetArea implements WidgetArea {
 
-    private final PropertyBuilder propertyBuilder = new PropertyBuilder();
-
-    public BasicWidgetArea(JPanel panel, WidgetRegistry registry) {
+    public BasicWidgetArea(JPanel panel, ServiceRegistry serviceRegistry, WidgetRegistry registry) {
         this.panel = panel;
+        this.serviceRegistry = serviceRegistry;
         this.registry = registry;
     }
 
@@ -30,6 +31,9 @@ public class BasicWidgetArea implements WidgetArea {
 
     @Override
     public void add(String widgetName, String param) {
+        Logger logger = (Logger) serviceRegistry.lookupService(Logger.class);
+        logger.logDebug("Adding: " + widgetName + "," + param);
+
         JComponent widget = registry.instantiate(widgetName, PropertyBuilder.fromString(param));
         widget.setVisible(true);
         panel.add(widget);
@@ -38,5 +42,6 @@ public class BasicWidgetArea implements WidgetArea {
     }
 
     private final JPanel panel;
+    private ServiceRegistry serviceRegistry;
     private final WidgetRegistry registry;
 }

@@ -1,5 +1,6 @@
 package com.example.prototype.common.widget;
 
+import com.example.prototype.api.plugin.ServiceRegistry;
 import com.example.prototype.api.widget.WidgetArea;
 import com.example.prototype.api.widget.WidgetAreaRegistry;
 
@@ -27,6 +28,10 @@ public class BasicWidgetAreaRegistry implements WidgetAreaRegistry {
         int sz = areas.size();
         areas.remove(widgetArea);
         assert sz + 1 == areas.size();
+    }
+
+    public void dispose() {
+        areas.clear();
     }
 
     private final Map<String, WidgetArea> areas = new HashMap<String, WidgetArea>();

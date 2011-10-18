@@ -68,7 +68,7 @@ public class PluginManager {
         for (final Plugin plugin : plugins) {
             plugin.unload();
         }
-
+        plugins.clear();
     }
 
     private final ServiceRegistry registry;
