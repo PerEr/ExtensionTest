@@ -3,6 +3,7 @@ package com.example.prototype.log;
 import com.example.prototype.api.services.Logger;
 
 public class BasicLogger implements Logger {
+
     public void logError(String message) {
         System.err.println("Err:" + message);
     }
@@ -14,4 +15,5 @@ public class BasicLogger implements Logger {
     public void logDebug(String message) {
         System.out.println("Dbg:" + message);
     }
+
 }

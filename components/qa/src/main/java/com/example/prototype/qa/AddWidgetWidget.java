@@ -1,6 +1,7 @@
 package com.example.prototype.qa;
 
 import com.example.prototype.api.plugin.ServiceRegistry;
+import com.example.prototype.api.services.Logger;
 import com.example.prototype.api.widget.WidgetArea;
 import com.example.prototype.api.widget.WidgetAreaRegistry;
 import com.example.prototype.api.widget.WidgetFactory;
@@ -25,19 +26,21 @@ class AddWidgetWidget extends JButton implements WidgetChoiceListener {
         });
     }
 
+    @Override
+    public void onChoice(String choice) {
+        final WidgetAreaRegistry areaRegistry = (WidgetAreaRegistry) serviceRegistry.lookupService(WidgetAreaRegistry.class);
+        WidgetArea widgetArea = areaRegistry.lookup("bottom");  // TODO
+        widgetArea.add(choice);
+        Logger logger = (Logger) serviceRegistry.lookupService(Logger.class);
+        logger.logInfo("Instantiated: " + choice);
+    }
+
     private void onClick() {
         final JFrame frame = (JFrame) serviceRegistry.lookupService(JFrame.class);
         new WidgetNameDialog(frame, this);
     }
 
     private ServiceRegistry serviceRegistry;
-
-    @Override
-    public void onChoice(String choice) {
-        final WidgetAreaRegistry areaRegistry = (WidgetAreaRegistry) serviceRegistry.lookupService(WidgetAreaRegistry.class);
-        WidgetArea widgetArea = areaRegistry.lookup("bottom");  // TODO
-        widgetArea.add(choice);
-    }
 
     static class Factory implements WidgetFactory {
 
