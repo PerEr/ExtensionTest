@@ -4,4 +4,4 @@ workspace.xml
 originals
 artifacts
 target/
-
+inst*.sh
