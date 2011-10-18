@@ -5,6 +5,7 @@ import com.example.prototype.api.widget.WidgetArea;
 import com.example.prototype.api.widget.WidgetAreaRegistry;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class BasicWidgetAreaRegistry implements WidgetAreaRegistry {
@@ -24,14 +25,25 @@ public class BasicWidgetAreaRegistry implements WidgetAreaRegistry {
     }
 
     @Override
-    public void unpublishWidgetArea(String name, WidgetArea widgetArea) {
-        int sz = areas.size();
-        areas.remove(widgetArea);
-        assert sz + 1 == areas.size();
+    public void unpublishWidgetArea(WidgetArea widgetArea) {
+        int removed = 0;
+        Iterator<Map.Entry<String, WidgetArea>> ii = areas.entrySet().iterator();
+        while (ii.hasNext()) {
+            Map.Entry<String, WidgetArea> entry = ii.next();
+            if (entry.getValue() == widgetArea) {
+                ii.remove();
+                ++removed;
+            }
+        }
+        assert removed > 0;
     }
 
     public void dispose() {
         areas.clear();
+    }
+
+    int areas() {
+        return areas.size();
     }
 
     private final Map<String, WidgetArea> areas = new HashMap<String, WidgetArea>();

@@ -145,13 +145,27 @@ public class TestApplet extends Applet {
     private JPanel bottomPanel = buildHorizontalWidgetPanel();
 
     private final PluginManager pluginManager = new PluginManager(serviceRegistry, new PluginManagerNotification() {
+
+        @Override
+        public void onLoad(String className) {
+            log("Loaded " + className);
+        }
+
+        @Override
         public void onLoadFailure(String classname, Exception e) {
             log("Failed to load " + classname);
         }
 
-        public void onLoaded(String className) {
-            log("Loaded " + className);
+        @Override
+        public void onResolve(String className) {
+            log("resolved " + className);
         }
+
+        @Override
+        public void onResolveFailure(String classname, Exception e) {
+            log("Failed to resolve " + classname);
+        }
+
     });
 
 }

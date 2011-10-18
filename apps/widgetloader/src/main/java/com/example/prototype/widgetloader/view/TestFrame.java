@@ -66,16 +66,30 @@ public class TestFrame extends JFrame {
         }
 
         final PluginManager pluginManager = new PluginManager(serviceRegistry, new PluginManagerNotification() {
+
+            @Override
+            public void onLoad(String className) {
+            }
+
+            @Override
             public void onLoadFailure(String classname, Exception e) {
                 log("Failed to load " + classname);
                 inputField.requestFocus();
             }
 
-            public void onLoaded(String className) {
+            @Override
+            public void onResolve(String className) {
                 log("Loaded " + className);
                 inputField.setText("");
                 inputField.requestFocus();
             }
+
+            @Override
+            public void onResolveFailure(String classname, Exception e) {
+                log("Failed to resolve " + classname);
+                inputField.requestFocus();
+            }
+
         });
 
         container.add(buildControlPanel(pluginManager), BorderLayout.PAGE_END);

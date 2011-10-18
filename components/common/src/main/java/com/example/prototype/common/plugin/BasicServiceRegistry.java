@@ -22,12 +22,19 @@ public class BasicServiceRegistry implements ServiceRegistry {
     }
 
     public int unpublishService(Object service) {
+
         int count = 0;
-        for (final Deque<Object> services : servicesMap.values()) {
+        Iterator<Map.Entry<Class, Deque<Object>>> ii = servicesMap.entrySet().iterator();
+        while (ii.hasNext()) {
+            Map.Entry<Class, Deque<Object>> entry = ii.next();
+            Deque<Object> services = entry.getValue();
             int sz = services.size();
             services.remove(service);
             count += sz - services.size();
+            if (services.size() == 0)
+                ii.remove();
         }
+
         for (ServiceRegistryNotification listener : listeners) {
             listener.onServiceUnpublished(service);
         }
@@ -35,7 +42,8 @@ public class BasicServiceRegistry implements ServiceRegistry {
     }
 
     public Object lookupService(Class cl) {
-        return servicesMap.get(cl).getFirst();
+        Deque<Object> entry = servicesMap.get(cl);
+        return entry != null ? entry.getFirst() : null;
     }
 
     public void dispose() {
@@ -67,6 +75,14 @@ public class BasicServiceRegistry implements ServiceRegistry {
         for (ServiceRegistryNotification listener : listeners) {
             listener.onServicePublished(serviceType, service);
         }
+    }
+
+    int services() {
+        return servicesMap.size();
+    }
+
+    int listeners() {
+        return listeners.size();
     }
 
     private final Map<Class, Deque<Object>> servicesMap = new HashMap<Class, Deque<Object>>();

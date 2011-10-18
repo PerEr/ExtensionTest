@@ -12,13 +12,13 @@ public interface Plugin {
      * Register services with the service registry
      * @param registry The service registry
      */
-    void load(ServiceRegistry registry);
+    void load(ServiceRegistry registry) throws Exception;
 
     /**
      * Resolve dependencies to services used.
      * @param registry The service registry
      */
-    void resolve(ServiceRegistry registry);
+    void resolve(ServiceRegistry registry) throws Exception;
 
     /**
      * De-register all published services and cleanup all resources in use.

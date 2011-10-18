@@ -17,51 +17,42 @@ public class PluginManager {
 
     public int autodetectPlugins() {
 
-        List<Plugin> detectedPlugins = new LinkedList<Plugin>();
+        final List<Plugin> detectedPlugins = new LinkedList<Plugin>();
 
         // Detect and instantiate all "Plugin" classes.
-        ServiceLoader<Plugin> loader = ServiceLoader.load(Plugin.class);
-        Iterator<Plugin> ii = loader.iterator();
-        while (ii.hasNext()) {
-            Plugin plugin = ii.next();
+        final ServiceLoader<Plugin> loader = ServiceLoader.load(Plugin.class);
+        for (Plugin plugin : loader) {
             detectedPlugins.add(plugin);
         }
 
-
-        for (Plugin plugin : detectedPlugins) {
-            plugin.load(registry);
-        }
-
-        for (Plugin plugin : detectedPlugins) {
-            plugin.resolve(registry);
-        }
-
-        return detectedPlugins.size();
-    }
-
-    public void load(String[] classNames) {
-
-        final List<Plugin> newPlugins = new LinkedList<Plugin>();
-
-        // Publish services
-        for (final String className : classNames) {
+        // Step 1) "Load" all plugins
+        Iterator<Plugin> ii = detectedPlugins.iterator();
+        while (ii.hasNext()) {
+            Plugin plugin = ii.next();
+            String name = plugin.getClass().getName();
             try {
-                final Class cl = Class.forName(className);
-                Plugin plugin = (Plugin) cl.newInstance();
                 plugin.load(registry);
-                newPlugins.add(plugin);
-                notification.onLoaded(className);
-            } catch (Exception e) {
-                notification.onLoadFailure(className, e);
+                notification.onLoad(name);
+            } catch(Exception ex) {
+                notification.onLoadFailure(name, ex);
+                ii.remove();
             }
         }
 
-        // Resolve intra-plugin dependencies
-        for (final Plugin plugin : newPlugins) {
-            plugin.resolve(registry);
-            plugins.add(plugin);
+        // Step 2) "Resolve" all loaded plugins
+        for (Plugin plugin : detectedPlugins) {
+            String name = plugin.getClass().getName();
+            try {
+                plugin.resolve(registry);
+                notification.onResolve(name);
+            } catch(Exception ex) {
+                notification.onResolveFailure(name, ex);
+                ii.remove();
+            }
         }
 
+        // Return the plugins that both loaded and resolved
+        return detectedPlugins.size();
     }
 
     public void dispose() {
