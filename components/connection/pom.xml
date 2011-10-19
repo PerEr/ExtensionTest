@@ -14,6 +14,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <parent>
+        <groupId>com.example.prototype</groupId>
+        <artifactId>components</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <build>
         <plugins>
             <plugin>
