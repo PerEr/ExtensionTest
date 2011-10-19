@@ -6,7 +6,6 @@
   <artifactId>whole-shebang</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>everything</name>
 
   <modules> 
 
