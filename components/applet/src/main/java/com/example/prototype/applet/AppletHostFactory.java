@@ -38,7 +38,7 @@ public class AppletHostFactory implements WidgetFactory {
             Class<Applet> appletClass = (Class<Applet>) classLoader.loadClass(appletConfig.code());
             Applet applet = appletClass.newInstance();
             AppletContext appletContext = new BasicAppletContext();
-            AppletStub appletStub = new BasicAppletStub(appletContext, prp);
+            AppletStub appletStub = new BasicAppletStub(appletContext, appletConfig, prp);
             applet.setStub(appletStub);
             applet.setSize(appletConfig.dimension());
             applet.init();
@@ -46,7 +46,7 @@ public class AppletHostFactory implements WidgetFactory {
             panel.add(applet);
         } catch (Throwable tt) {
             JTextArea label = new JTextArea("Applet\n" +
-                    appletConfig.url() + appletConfig.code() +
+                    appletConfig.url() + ":" + appletConfig.code() +
                     "\nfailed to load:\n" + sb.toString());
             label.setEditable(false);
             panel.add(label);
