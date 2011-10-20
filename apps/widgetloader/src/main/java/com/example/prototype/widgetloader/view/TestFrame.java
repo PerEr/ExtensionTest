@@ -143,16 +143,26 @@ public class TestFrame extends JFrame {
         }
 
         JComponent widget = widgetRegistry.instantiate(widgetName, PropertyBuilder.fromString(parameters));
-        widget.setVisible(true);
+        if (widget != null) {
+            widget.setVisible(true);
 
-        JFrame widgetFrame = new JFrame();
-        widgetFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        widgetFrame.getContentPane().add(widget, BorderLayout.CENTER);
-        widgetFrame.pack();
-        widgetFrame.setVisible(true);
+            JFrame widgetFrame = new JFrame();
+            widgetFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            widgetFrame.getContentPane().add(widget, BorderLayout.CENTER);
+            widgetFrame.pack();
+            widgetFrame.setVisible(true);
+        } else {
+            logError("Failed to instantiate widget " + widgetName);
+        }
     }
 
     private void shutdown() {
+    }
+
+    private void logError(String message) {
+        final Logger logger = (Logger) serviceRegistry.lookupService(Logger.class);
+        logger.logError(message);
+        statusLine.setText(message);
     }
 
     private void log(String message) {

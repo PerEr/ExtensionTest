@@ -12,29 +12,35 @@ public class LogWidgetFactory implements WidgetFactory, Logger {
     @Override
     public JComponent instantiate(Properties prp) {
         LogWidget logWidget = new LogWidget(listModel);
-        return logWidget;
+        logWidget.setCellRenderer(coloredCellRenderer);
+        return new JScrollPane(logWidget);
     }
 
     @Override
     public void logError(String message) {
-        addWithColor(message, Color.RED);
+        addWithColor(message, errorColor);
     }
 
     @Override
     public void logInfo(String message) {
-        addWithColor(message, Color.BLACK);
+        addWithColor(message, infoColor);
     }
 
     @Override
     public void logDebug(String message) {
-        addWithColor(message, Color.GRAY);
+        addWithColor(message, debugColor);
     }
 
     private void addWithColor(String message, Color color) {
-        JLabel label = new JLabel(message);
-        label.setForeground(color);
-        listModel.addElement(message);
+        LogEntry logEntry = new LogEntry(message, color);
+        listModel.addElement(logEntry);
     }
 
+    private final Color errorColor = new Color(128,0, 0);
+    private final Color infoColor = new Color(0,128,0);
+    private final Color debugColor = Color.GRAY;
+
+
+    private final ListCellRenderer coloredCellRenderer = new ColoredCellRenderer();
     private static DefaultListModel listModel = new DefaultListModel();
 }

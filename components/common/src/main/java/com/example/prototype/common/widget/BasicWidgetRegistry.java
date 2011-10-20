@@ -48,9 +48,7 @@ public class BasicWidgetRegistry implements WidgetRegistry {
 
         WidgetFactory factory = builders.get(type);
 
-        assert factory != null;
-
-        return factory.instantiate(prp);
+        return factory != null ? factory.instantiate(prp) : null;
     }
 
     public void addListener(WidgetRegistryNotification listener) {
